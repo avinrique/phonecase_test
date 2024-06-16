@@ -1,5 +1,7 @@
 //modules
 const order_s = require("./model/orderedmodel")
+const carts = require("./model/cartmodel")
+
 require('dotenv').config()
 const express = require('express')
 const app = express()
@@ -191,6 +193,9 @@ app.post("/addtocart", (req,res)=>{
     image_name= req.body.imagename
     image_catagory =  req.body.catagory
     console.log(image_name,image_url,phone_brand,phone_case,phone_model)
+
+
+
     res.redirect("/cart")
 
 })

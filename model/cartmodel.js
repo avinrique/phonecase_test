@@ -1,7 +1,4 @@
 const mongoose = require('mongoose')
-const crypto = require('crypto')
-const validator = require('validator')
-const passportlocalMongoose = require("passport-local-mongoose")
 const findOrCreate = require('mongoose-findorcreate')
 const cartSchema = new mongoose.Schema({
     design:{
@@ -19,11 +16,12 @@ const cartSchema = new mongoose.Schema({
     {
         type: String
     },
-    version : 
+    design_name : 
     {
-        type : String ,
-        enum:["iphone" ,"android"]
+        type : String 
     },
-    
 
 })
+    
+const carts =  mongoose.model('Carts', cartSchema)
+module.exports = carts
