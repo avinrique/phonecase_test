@@ -193,6 +193,14 @@ app.post("/addtocart", (req,res)=>{
     image_name= req.body.imagename
     image_catagory =  req.body.catagory
     console.log(image_name,image_url,phone_brand,phone_case,phone_model)
+    const newOrder = new order_s({
+        image_url ,
+        case_material,
+        phone_brand,
+        phone_model,
+        image_name ,
+        
+    });
 
 
 
