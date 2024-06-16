@@ -1,0 +1,67 @@
+<select id="case_material">
+    <option value="softcase">Soft Case</option>
+    <option value="hardcase">Hard Case</option>
+    <option value="glasscase">Glass Case</option>
+  </select>
+  
+  <select id="phone_brand">
+    <!-- Populate the phone brand options dynamically from your CSV data -->
+  </select>
+  
+  <select id="phone_model">
+    <!-- Populate the phone model options dynamically based on the selected brand and case_material -->
+  </select>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+  <script>
+    // Function to populate phone brand options
+    function populatePhoneBrands(data) {
+      const phoneBrandSelect = document.getElementById('phone_brand');
+      const brands = [...new Set(data.map(row => row.brand))];
+      brands.forEach(brand => {
+        const option = document.createElement('option');
+        option.value = brand;
+        option.textContent = brand;
+        phoneBrandSelect.appendChild(option);
+      });
+    }
+  
+    // Function to populate phone model options based on the selected brand and case material
+    function populatePhoneModels(data, selectedBrand, selectedCaseMaterial) {
+      const phoneModelSelect = document.getElementById('phone_model');
+      phoneModelSelect.innerHTML = ''; // Clear previous options
+      const models = data
+        .filter(row => row.brand === selectedBrand && row.case_material.includes(selectedCaseMaterial))
+        .map(row => row.model);
+      models.forEach(model => {
+        const option = document.createElement('option');
+        option.value = model;
+        option.textContent = model;
+        phoneModelSelect.appendChild(option);
+      });
+    }
+  
+    // Load and parse the CSV data
+    Papa.parse('phone_models.csv', {
+      download: true,
+      header: true,
+      dynamicTyping: true,
+      complete: function (results) {
+        const data = results.data;
+        populatePhoneBrands(data);
+  
+        // Event listeners for brand and case material selections
+        document.getElementById('phone_brand').addEventListener('change', function () {
+          const selectedBrand = this.value;
+          const selectedCaseMaterial = document.getElementById('case_material').value;
+          populatePhoneModels(data, selectedBrand, selectedCaseMaterial);
+        });
+  
+        document.getElementById('case_material').addEventListener('change', function () {
+          const selectedBrand = document.getElementById('phone_brand').value;
+          const selectedCaseMaterial = this.value;
+          populatePhoneModels(data, selectedBrand, selectedCaseMaterial);
+        });
+      },
+    });
+  </script>
+  

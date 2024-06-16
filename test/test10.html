@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Form with Select, H1, and P</title>
+</head>
+<body>
+
+<h2>Send Email</h2>
+
+<form action="mailto:recipient@example.com" method="post" enctype="text/plain" onsubmit="prepareEmail()">
+    Name: <br>
+    <input type="text" name="name" required><br><br>
+    
+    Email: <br>
+    <input type="email" name="email" required><br><br>
+    
+    Subject: <br>
+    <input type="text" name="subject" required><br><br>
+    
+    Message: <br>
+    <textarea name="message" rows="4" cols="50" required></textarea><br><br>
+
+    <select id="mySelect">
+        <option value="Option 1">Option 1</option>
+        <option value="Option 2">Option 2</option>
+        <option value="Option 3">Option 3</option>
+    </select><br><br>
+
+    <h1 id="myH1">This is an H1 Heading</h1><br><br>
+
+    <p id="myP">This is a paragraph.</p><br><br>
+
+    <input type="submit" value="Send Email">
+</form>
+
+<script>
+    function prepareEmail() {
+        const name = document.getElementsByName("name")[0].value;
+        const email = document.getElementsByName("email")[0].value;
+        const subject = document.getElementsByName("subject")[0].value;
+        const message = document.getElementsByName("message")[0].value;
+        const selectValue = document.getElementById("mySelect").value;
+        const h1Value = document.getElementById("myH1").textContent;
+        const pValue = document.getElementById("myP").textContent;
+
+        // Compose the email body
+        const emailBody = `
+            Name: ${name}
+            Email: ${email}
+            Subject: ${subject}
+            Selected Option: ${selectValue}
+            H1 Content: ${h1Value}
+            Paragraph Content: ${pValue}
+        `;
+
+        // Set the email body in the form
+        document.getElementsByName("message")[0].value = emailBody;
+    }
+</script>
+
+</body>
+</html>

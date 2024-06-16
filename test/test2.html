@@ -1,0 +1,235 @@
+<style>
+    .selector {
+  display: inline-block;
+}
+
+#modelSelect {
+  display: none;
+}
+
+#modelSelect.show {
+  display: block;
+}
+
+
+</style>
+<form  >
+<div class="selector">
+    <select id="brandSelect" name="brand">
+      <option value="" disabled selected>Select Brand</option>
+
+    </select>
+    <input type="text" id="search-input" oninput="showSuggestions()" placeholder="search for the model" >
+    <ul id="suggestions-list"></ul>
+    <select id="modelSelect" disabled name="phone model">
+      <option value="" disabled selected>Select Model</option>
+    </select>
+  </div>
+  <input type="submit" name="dones" id="">
+
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <script>
+
+suggestions = []
+const brandSelect = document.getElementById('brandSelect');
+const modelSelect = document.getElementById('modelSelect');
+
+brandSelect.addEventListener('click', function(){
+    brandSelect.innerHTML = '<option value="" disabled selected>Select Brand</option>';
+    brandSelect.disabled = false;
+    brandSelect.classList.add('show');
+    setTimeout(function() {
+      const brands = getbrands(); 
+      console.log(brands)
+      brands.forEach(function(brand) {
+        const option = document.createElement('option');
+        option.value = brand.toLowerCase();
+        option.textContent = brand.toLowerCase();
+        brandSelect.appendChild(option);
+      });
+    }, 200);
+    
+})
+
+brandSelect.addEventListener('change', function() {
+  const selectedBrand = brandSelect.value;
+  if (selectedBrand) {
+    modelSelect.innerHTML = '<option value="" disabled selected>Select Model</option>';
+    modelSelect.disabled = false;
+    modelSelect.classList.add('show');
+    setTimeout(function() {
+      const models = getModels(selectedBrand); 
+      models.forEach(function(model) {
+        const option = document.createElement('option');
+        option.value = model.toLowerCase();
+        option.textContent = model.toLowerCase();
+        modelSelect.appendChild(option);
+      });
+    }, 500);
+  } 
+  else {
+    modelSelect.innerHTML = '<option value="" disabled selected>Select Model</option>';
+    modelSelect.disabled = true;
+    modelSelect.classList.remove('show');
+  }
+});
+
+modelSelect.addEventListener("click", function() {
+dothat()
+})
+
+function dothat(){
+    
+    const options = Array.from(modelSelect.options);
+    suggestions = []
+    options.forEach(function(option) {
+    const modelsss = option.textContent.toLowerCase();
+    if(modelsss =="select model" ){
+
+    }
+    else{
+       suggestions.push(modelsss)
+    }
+  });
+
+console.log(suggestions)
+}
+
+
+
+
+
+function showSuggestions() {
+  const input = document.getElementById("search-input").value.toLowerCase();
+  const suggestionsList = document.getElementById("suggestions-list");
+  
+  suggestionsList.innerHTML = "";
+
+
+
+  const filteredSuggestions = suggestions.filter(suggestion =>
+    suggestion.toLowerCase().includes(input)
+    
+  );
+  
+
+  filteredSuggestions.forEach(suggestion => {
+    const li = document.createElement("li");
+    li.textContent = suggestion;
+    li.addEventListener("click", function() {
+      selectSuggestion(suggestion);
+    });
+    suggestionsList.appendChild(li);
+  });
+}
+
+function selectSuggestion(suggestion) {
+  document.getElementById("search-input").value = suggestion;
+  console.log(suggestion)
+  for (var i = 0; i < modelSelect.options.length; i++) {
+    if (modelSelect.options[i].value === suggestion) {
+      modelSelect.selectedIndex = i;
+      document.getElementById("suggestions-list").innerHTML = "";
+      break;
+    }
+  }
+  
+}
+
+document.addEventListener('click', function(event) {
+  if (!event.target.closest('.selector')) {
+    modelSelect.classList.remove('show');
+  }
+});
+
+function getbrands(){
+  const phone_brand = ["iphone" , "samsung" , "oneplus" , "xaiomi" , "vivo" , "oppo" , "realme" ,"lenovo"]
+  return phone_brand || [];
+}
+
+
+
+
+function getModels(brand) {
+
+
+  const models = {
+    iphone: ['iPhone 11', 'iPhone 12', 'iPhone SE', 'iPhone XR'],
+    samsung: ['Galaxy S21', 'Galaxy Note 20', 'Galaxy A52', 'Galaxy Z Flip']
+  };
+
+  return models[brand] || [];
+}
+
+
+function getallmodels(){
+suggestions = []
+  const the_brands = getbrands()
+  for(var i =0; i<the_brands.length; i++){
+      const the_models = getModels(the_brands[i])
+      the_models.forEach(function(model_s){
+      suggestions.push(model_s)
+    })
+  }
+}
+getallmodels()
+
+
+  </script>

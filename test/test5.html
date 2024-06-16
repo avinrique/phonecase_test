@@ -1,0 +1,35 @@
+<select name="" id="avin" onchange="handleSelectChange(this)">
+    <option value="abc">abc</option>
+    <option value="aac">aac</option>
+    <option value="acc">acc</option>
+    <option value="b">b</option>
+    <option value="c">c</option>
+    <option value="d">d</option>
+    <option value="e">e</option>
+    <option value="f">f</option>
+    <option value="g">g</option>
+    <option value="h">h</option>
+</select>
+
+<script>
+
+function handleSelectChange(selectElement) {
+    selectElement.focus();
+}
+
+document.getElementById("avin").addEventListener("keypress", function(event) {
+    var key = event.key.toLowerCase();
+    var selectElement = document.getElementById("avin");
+    var options = selectElement.options;
+    console.log("key")
+    for (var i = 0; i < options.length; i++) {
+        var option = options[i];
+        var optionValue = option.value.toLowerCase();
+
+        if (optionValue.includes(key)) {
+            selectElement.value = option.value;
+            break;
+        }
+    }
+});
+</script>

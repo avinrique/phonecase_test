@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload a Design</title>
+</head>
+<body>
+    <h1>Upload a Design</h1>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="file" name="design_image" accept="image/*">
+        <input type="text" name="design_name" placeholder="Design Name">
+        <select name="category">
+            <option value="Anime">Anime</option>
+            <option value="Classic">Classic</option>
+            <option value="marble desing">Marble Design</option>
+            <option value="Classic Dark">Classic Dark</option>
+            <option value="customised Photo">Customized Photo</option>
+            <option value="customised Design">Customized Design</option>
+            <option value="Marval">Marval</option>
+            <option value="funky">Funky</option>
+            <option value="traditional">Traditional</option>
+            <option value="custom Name">Custom Name</option>
+            <option value="sports">Sports</option>
+            <option value="others">Others</option>
+          </select>
+        <input type="submit" value="Upload Design">
+    </form>
+</body>
+</html>

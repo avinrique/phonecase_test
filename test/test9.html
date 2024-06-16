@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Dropdown</title>
+</head>
+<body>
+    <div class="u-container-style u-image u-list-item u-repeater-item u-shading u-image-5">
+        <div class="u-container-layout u-similar-container u-container-layout-5">
+            <form action="" method="">
+                <h3 class="u-text u-text-default u-text-14">galaxy</h3>
+                <p hidden name="nameid">assa</p>
+                <p name="price" class="u-text u-text-default u-text-15">price: Rs 199</p>
+                <select style="color: black;" name="case_material" class="case_mat">
+                    <option value="silicon">silicon case</option>
+                    <option value="hard">hard case</option>
+                    <option value="glass">glass case</option>
+                </select>
+                <label for="brandSelector1">Select Brand:</label>
+                <select style="color: black;" class="brandSelector" name="phonebrand">
+                    <option value="" selected="true" disabled="disabled">Choose Brand</option>
+    
+                </select>
+                <label for="modelSelector1">Select Model:</label>
+                <select style="color: black;" class="modelSelector" disabled name="phonemodel">
+                    <option>Select a Brand first</option>
+                </select>
+                <a type="button" class="u-border-2 u-border-hover-palette-2-base u-border-palette-1-base u-btn u-btn-round u-button-style u-none u-radius-50 u-btn-5">
+                    <button type="submit">hey</button>
+                </a>
+                <textarea name="message" cols="30" rows="10" hidden></textarea>
+                <br>
+            </form>
+        </div>
+    </div>
+
+<div class="u-container-style u-image u-list-item u-repeater-item u-shading u-image-5">
+    <div class="u-container-layout u-similar-container u-container-layout-5">
+        <form action="" method="">
+            <h3 class="u-text u-text-default u-text-14">galaxy</h3>
+            <p hidden name="nameid">aaaaaaa</p>
+            <p name="price" class="u-text u-text-default u-text-15">price: Rs 199</p>
+            <select style="color: black;" name="case_material" class="case_mat">
+                <option value="silicon">silicon case</option>
+                <option value="hard">hard case</option>
+                <option value="glass">glass case</option>
+            </select>
+            <label for="brandSelector1">Select Brand:</label>
+            <select style="color: black;" class="brandSelector" name="phonebrand">
+                <option value="" selected="true" disabled="disabled">Choose Brand</option>
+
+            </select>
+            <label for="modelSelector1">Select Model:</label>
+            <select style="color: black;" class="modelSelector" disabled name="phonemodel">
+                <option>Select a Brand first</option>
+            </select>
+            <a type="button" class="u-border-2 u-border-hover-palette-2-base u-border-palette-1-base u-btn u-btn-round u-button-style u-none u-radius-50 u-btn-5">
+                <button type="submit">hey</button>
+            </a>
+            <textarea name="message" cols="30" rows="10" hidden></textarea>
+            <br>
+        </form>
+    </div>
+</div>
+/
+<div class="u-container-style u-image u-list-item u-repeater-item u-shading u-image-5">
+    <div class="u-container-layout u-similar-container u-container-layout-5">
+        <form action="" method="">
+         
+            <select style="color: black;" name="case_material" class="case_mat">
+                <option value="silicon">silicon case</option>
+                <option value="hard">hard case</option>
+                <option value="glass">glass case</option>
+            </select>
+            <label for="brandSelector1">Select Brand:</label>
+            <select style="color: black;" class="brandSelector" name="phonebrand">
+                <option value="" selected="true" disabled="disabled">Choose Brand</option>
+                <option value="samsung">Samsung</option>
+                <option value="iphone">iPhone</option>
+                <option value="oneplus">OnePlus</option>
+            </select>
+            <label  for="modelSelector1">Select Model:</label>
+            <select style="color: black;" class="modelSelector" disabled name="phonemodel">
+                <option>Select a Brand first</option>
+            </select>
+            <a type="button" class="u-border-2 u-border-hover-palette-2-base u-border-palette-1-base u-btn u-btn-round u-button-style u-none u-radius-50 u-btn-5">
+                <button type="submit">hey</button>
+            </a>
+            <textarea name="message" cols="30" rows="10" hidden></textarea>
+            <br>
+        </form>
+    </div>
+</div>
+
+<script>
+const phoneData = [
+  { 'brand': 'iPhone', 'model': 'iPhone 5', 'case_material': 'silicon' },
+  { 'brand': 'iPhone', 'model': '5S', 'case_material': 'silicon' },
+  { 'brand': 'iPhone', 'model': '5C', 'case_material': 'silicon' },
+  { 'brand': 'iPhone', 'model': 'iPhone 6', 'case_material': 'hard' },
+  { 'brand': 'iPhone', 'model': '6s', 'case_material': 'hard' },
+  { 'brand': 'iPhone', 'model': 'iPhone 7', 'case_material': 'hard' },
+  { 'brand': 'Samsung', 'model': 'Galaxy S10', 'case_material': 'silicon' },
+];
+
+const caseMaterialSelectors = document.querySelectorAll('.case_mat');
+const brandSelectors = document.querySelectorAll('.brandSelector');
+const modelSelectors = document.querySelectorAll('.modelSelector');
+
+for (let i = 0; i < brandSelectors.length; i++) {
+    const caseMaterialSelector = caseMaterialSelectors[i];
+    const brandSelector = brandSelectors[i];
+    const modelSelector = modelSelectors[i];
+
+    brandSelector.innerHTML = '<option value="">Select Brand</option>';
+    const uniqueBrands = [...new Set(phoneData.map(item => item.brand))];
+    uniqueBrands.forEach(brand => {
+        const option = document.createElement('option');
+        option.value = brand;
+        option.text = brand;
+        brandSelector.appendChild(option);
+    });
+
+    brandSelector.addEventListener('change', () => {
+        const selectedBrand = brandSelector.value;
+        const selectedCaseMaterial = caseMaterialSelector.value;
+
+        if (selectedBrand) {
+            const brandModels = phoneData.filter(item => item.brand === selectedBrand && item.case_material === selectedCaseMaterial).map(item => item.model);
+
+            modelSelector.innerHTML = '<option value="">Select Model</option>';
+            brandModels.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model;
+                option.text = model;
+                modelSelector.appendChild(option);
+            });
+            modelSelector.disabled = false;
+        } else {
+            modelSelector.innerHTML = '<option value="">Select Model</option>';
+            modelSelector.disabled = true;
+        }
+    });
+
+    caseMaterialSelector.addEventListener('change', () => {
+        const selectedBrand = brandSelector.value;
+        const selectedCaseMaterial = caseMaterialSelector.value;
+
+        if (selectedBrand) {
+            const brandModels = phoneData.filter(item => item.brand === selectedBrand && item.case_material === selectedCaseMaterial).map(item => item.model);
+
+            modelSelector.innerHTML = '<option value="">Select Model</option>';
+            brandModels.forEach(model => {
+                const option = document.createElement('option');
+                option.value = model;
+                option.text = model;
+                modelSelector.appendChild(option);
+            });
+            modelSelector.disabled = false;
+        } else {
+            modelSelector.innerHTML = '<option value="">Select Model</option>';
+            modelSelector.disabled = true;
+        }
+    });
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    @media only screen and (max-width: 768px) {
+
+      .container {
+        display: block;
+      }
+  
+      .product-card {
+        width: 100%;
+      }
+    }
+    @media only screen and (min-width: 769px) {
+      .container {
+        display: flex;
+        flex-wrap: wrap;
+      }
+      .product-card {
+        width: calc(33.33% - 20px);
+        margin-right: 20px;
+      }
+  
+      .product-card:nth-child(3n) {
+        margin-right: 0;
+      }
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+  
+    .product-card {
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+  
+    .product-image {
+      max-width: 100%;
+      height: auto;
+    }
+  
+    .product-name {
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+  
+    .product-price {
+      font-size: 16px;
+      margin-top: 5px;
+    }
+  
+    .button-container {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 10px;
+    }
+  
+    .add-to-cart-button,
+    .buy-button {
+      padding: 8px 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+  
+    .add-to-cart-button:hover,
+    .buy-button:hover {
+      background-color: #45a049;
+    }
+  
+    .phone-model-selector,
+    .case-type-selector {
+      margin-top: 10px;
+      appearance: none;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      width: 100%;
+    }
+  
+
+    .phone-model-selector {
+      background-color: #f2f2f2;
+    }
+  
+    .case-type-selector {
+      background-color: #e8e8e8;
+    }
+    .responsive-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-top: 10px;
+    box-sizing: border-box;
+  }
+  #suggestions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+@media (max-width: 600px) {
+  #suggestions-list li {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 601px) and (max-width: 900px) {
+  #suggestions-list li {
+    font-size: 16px;
+  }
+}
+
+@media (min-width: 901px) {
+  #suggestions-list li {
+    font-size: 18px;
+  }
+}
+  </style>
+</head>
+<body>
+  <form >
+  <div class="container">
+    <div class="product-card">
+      <img class="product-image" src="https://c1.wallpaperflare.com/preview/51/932/916/hand-holding-phone-mobile-phone.jpg" alt="Product 1">
+
+      <h3 class="product-name" name=" catagory">Product 1</h3>
+      <p class="product-price" name="price">Rs.199</p>
+      <div class="button-container">
+        <button class="add-to-cart-button">Add to Cart</button>
+        <button class="buy-button">Buy</button>
+      </div>
+      <input type="text" id="search-input" oninput="showSuggestions()" placeholder="search for the model" class="responsive-input">
+      <ul id="suggestions-list"></ul>
+        <select id="brandSelect" class="phone-model-selector" name="phonebrand">
+          <option value="" disabled selected>Select Brand</option>
+        </select>
+
+        <select id="modelSelect" disabled name="phone model" class="phone-model-selector">
+          <option value="" disabled selected>Select Model</option>
+        </select>
+        <select class="case-type-selector">
+          <option value="Choose-phone-case">Choose case type</option>
+            <option value="hard-case">Hard Case</option>
+            <option value="silicon-case">Silicon Case</option>
+            <option value="glass-case">Glass Case</option></select>
+       <p class="product-details">Short product details here.</p>
+    </div>
+  </div>
+</form>
+</body>
+<script>
+The_unknown_brand = ""
+  suggestions = []
+  const brandSelect = document.getElementById('brandSelect');
+  const modelSelect = document.getElementById('modelSelect');
+  
+  brandSelect.addEventListener('click', function(){
+      brandSelect.innerHTML = '<option value="" disabled selected>Select Brand</option>';
+      brandSelect.disabled = false;
+      brandSelect.classList.add('show');
+      setTimeout(function() {
+        const brands = getbrands(); 
+        console.log(brands)
+        brands.forEach(function(brand) {
+          const option = document.createElement('option');
+          option.value = brand.toLowerCase();
+          option.textContent = brand.toLowerCase();
+          brandSelect.appendChild(option);
+        });
+      }, 200);
+  })
+  
+  brandSelect.addEventListener('change', function() {
+    const selectedBrand = brandSelect.value;
+    console.log(selectedBrand)
+    if (selectedBrand) {
+      modelSelect.innerHTML = '<option value="" disabled selected>Select Model</option>';
+      modelSelect.disabled = false;
+      modelSelect.classList.add('show');
+      setTimeout(function() {
+        const models = getModels(selectedBrand); 
+        models.forEach(function(model) {
+          const option = document.createElement('option');
+          option.value = model.toLowerCase();
+          option.textContent = model.toLowerCase();
+          modelSelect.appendChild(option);
+        });
+      }, 500);
+    } 
+    else {
+      modelSelect.innerHTML = '<option value="" disabled selected>Select Model</option>';
+      modelSelect.disabled = true;r
+      modelSelect.classList.remove('show');
+    }
+  
+  });
+
+  modelSelect.addEventListener("click", function() {
+  dothat()
+  })
+  
+  function dothat(){
+      
+      const options = Array.from(modelSelect.options);
+      suggestions = []
+      options.forEach(function(option) {
+      const modelsss = option.textContent.toLowerCase();
+      if(modelsss =="select model" ){
+  
+      }
+      else{
+         suggestions.push(modelsss)
+      }
+    });
+  
+  console.log(suggestions)
+  }
+  
+  
+  
+  
+  
+  function showSuggestions() {
+    const input = document.getElementById("search-input").value.toLowerCase();
+    const suggestionsList = document.getElementById("suggestions-list");
+    
+    suggestionsList.innerHTML = "";
+  
+  
+  
+    const filteredSuggestions = suggestions.filter(suggestion =>
+      suggestion.toLowerCase().includes(input)
+      
+    );
+
+    filteredSuggestions.forEach(suggestion => {
+      const li = document.createElement("li");
+      li.textContent = suggestion;
+      li.addEventListener("click", function() {
+        selectSuggestion(suggestion);
+      });
+      suggestionsList.appendChild(li);
+    });
+  }
+
+  function selectSuggestion(suggestion) {
+    document.getElementById("search-input").value = suggestion;
+    console.log(suggestion)
+    sed = getBrandNameFrommodel(suggestion)
+    for (var i = 0; i < brandSelect.options.length; i++) {
+      if (brandSelect.options[i].value === sed) {
+        alert()
+        brandSelect.selectedIndex = i;
+        break
+      }
+    }
+    for (var i = 0; i < modelSelect.options.length; i++) {
+      if (modelSelect.options[i].value === suggestion) {
+        modelSelect.selectedIndex = i;
+        document.getElementById("suggestions-list").innerHTML = "";
+        break;
+      }
+    }
+  }
+  document.addEventListener('click', function(event) {
+    if (!event.target.closest('.selector')) {
+      modelSelect.classList.remove('show');
+    }
+  });
+  function getbrands(){
+    const phone_brand = ["iphone" , "samsung" , "oneplus" , "xaiomi" , "vivo" , "oppo" , "realme" ,"lenovo"]
+    return phone_brand || [];
+  }
+  function getModels(brand) {
+  const models = {
+      iphone: ['iPhone 11', 'iPhone 12', 'iPhone SE', 'iPhone XR'],
+      samsung: ['Galaxy S21', 'Galaxy Note 20', 'Galaxy A52', 'Galaxy Z Flip']
+    };
+  
+    return models[brand] || [];
+  }
+  
+  
+  function getallmodels(){
+  suggestions = []
+    const the_brands = getbrands()
+    for(var i =0; i<the_brands.length; i++){
+        const the_models = getModels(the_brands[i])
+        the_models.forEach(function(model_s){
+        suggestions.push(model_s)
+      })
+    }
+  }
+  getallmodels()
+
+
+function  getBrandNameFrommodel(modeel){
+  The_unknown_brand = ""
+  const the_brands = getbrands()
+  for(var i =0; i<the_brands.length; i++){
+        const the_models = getModels(the_brands[i])
+        the_models.forEach(function(model_s){
+        if (model_s == modeel){
+          The_unknown_brand = the_brands[i]
+        }
+
+      })
+    }
+    return The_unknown_brand || "q"
+  }
+  
+    </script>
+</html>
+
