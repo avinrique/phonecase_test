@@ -188,11 +188,11 @@ app.post('/orderupload', customOrderUpload.single('custom_image'), (req, res) =>
 app.post("/addtocart", (req,res)=>{
     phone_model= req.body.phonemodel
     phone_brand= req.body.phonebrand
-    phone_case= req.body.case_material
+    case_material= req.body.case_material
     image_url= req.body.imageurl
     image_name= req.body.imagename
     image_catagory =  req.body.catagory
-    console.log(image_name,image_url,phone_brand,phone_case,phone_model)
+    console.log(image_name,image_url,phone_brand,phone_model)
     const newOrder = new order_s({
         image_url ,
         case_material,

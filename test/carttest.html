@@ -1,0 +1,28 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="aa"> avin</button>
+<button id="ab"> vain</button>
+<button id="ac"> cain</button>
+<script>
+    document.body.addEventListener('click', function(event) {
+  
+  if (event.target.tagName === 'button' || event.target.tagName === 'BUTTON' ) {
+    alert("hey human")
+      console.log(`Button ${event.target.id} clicked!`);
+      // Optionally, you can extract the number from the id if needed
+      const buttonNumber = event.target.id.replace('button', '');
+      console.log(`Button number ${buttonNumber} clicked!`);
+  }
+});
+</script>
+</body>
+</html>
+
+
