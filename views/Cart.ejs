@@ -167,34 +167,29 @@
       cartItemElement.classList.add('card', 'rounded-3', 'mb-4');
 
       cartItemElement.innerHTML = `
-        <div class="card-body p-4">
-          <div class="row d-flex justify-content-between align-items-center">
-            <div class="col-md-2 col-lg-2 col-xl-2">
-              <img src="/pic/${item.imageurl}" class="img-fluid rounded-3" alt="${item.imagename}">
-            </div>
-            <div class="col-md-3 col-lg-3 col-xl-3">
-              <p class="lead fw-normal mb-2">${item.imagename}</p>
-              <p><span class="text-muted">Size: </span>${item.size} <span class="text-muted">Color: </span>${item.color}</p>
-            </div>
-            <div class="col-md-3 col-lg-3 col-xl-2 d-flex align-items-center">
-              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                <i class="fas fa-minus"></i>
-              </button>
-              <input id="form1" min="0" name="quantity" value="${item.quantity}" type="number"
-                class="form-control form-control-sm" />
-              <button data-mdb-button-init data-mdb-ripple-init class="btn btn-link px-2"
-                onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                <i class="fas fa-plus"></i>
-              </button>
-            </div>
-            <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1 d-flex align-items-center">
-              <h5 class="mb-0">$${item.price}</h5>
-              <a href="#!" class="text-danger ms-2" style="text-decoration: none;"><i class="fas fa-trash fa-lg"></i></a>
-            </div>
+      <div class="card-body p-4">
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col-md-2 col-lg-2 col-xl-2">
+            <img src="/pic/${item.imageurl}" class="img-fluid rounded-3" alt="${item.imagename}">
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-3">
+            <p class="lead fw-normal mb-2">${item.imagename}</p>
+            <p><span class="text-muted">Case Type: </span>${item.casetype}</p>
+            <p><span class="text-muted">Brand: </span>${item.brand}</p>
+            <p><span class="text-muted">Model: </span>${item.model}</p>
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+            <input min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" />
+          </div>
+          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+            <h5 class="mb-0">£${item.price}</h5>
+          </div>
+          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+            <i class="fas fa-trash fa-lg text-danger" onclick="removeCartItem('${item.imagename}')"></i>
           </div>
         </div>
-      `;
+      </div>
+    `;
 
       cartItemsContainer.appendChild(cartItemElement);
     });
@@ -222,7 +217,7 @@
   }
 </script>
 
-<!-- Contact Us part -->
+<!-- Contact Us part  -->
 <section class="u-clearfix u-image u-shading u-section-6" id="sec-018f" style="background-image: url('images/gfgfggfggg-min.jpg');" data-image-width="1620" data-image-height="1080">
   <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
     <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
@@ -293,4 +288,5 @@
 </script>
 </body>
 </html>
+
 
