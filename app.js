@@ -202,14 +202,16 @@ app.post("/addtocart", (req,res)=>{
         
     });
    newCart.save().then(() => {
-        
+
+    
+    res.redirect("/cart")
       })
      .catch(err => {
          res.status(500).send(err);
       });
 
 
-    res.redirect("/cart")
+   
 
 })
 app.all('*', (req,res,next)=>{
