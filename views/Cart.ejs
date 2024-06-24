@@ -87,6 +87,15 @@
             max-width: 60px;
             text-align: center;
         }
+        @media (max-width: 992px) {
+            .navbar-nav {
+                flex-direction: row; /* Display items horizontally */
+            }
+            .navbar-nav .nav-link {
+                text-align: center; /* Center text on smaller screens */
+                padding: 1rem; /* More padding for better touch support */
+            }
+          }
     </style>
 </head>
 <body class="u-body u-xl-mode" data-lang="en">
@@ -165,7 +174,7 @@
     cartItems.forEach(item => {
       const cartItemElement = document.createElement('div');
       cartItemElement.classList.add('card', 'rounded-3', 'mb-4');
-
+      console.log(item)
       cartItemElement.innerHTML = `
       <div class="card-body p-4">
         <div class="row d-flex justify-content-between align-items-center">
@@ -174,17 +183,20 @@
           </div>
           <div class="col-md-3 col-lg-3 col-xl-3">
             <p class="lead fw-normal mb-2">${item.imagename}</p>
-            <p><span class="text-muted">Case Type: </span>${item.casetype}</p>
-            <p><span class="text-muted">Brand: </span>${item.brand}</p>
-            <p><span class="text-muted">Model: </span>${item.model}</p>
+            <p><span class="text-muted">Case Type: </span>${item.case_material}</p>
+            <p><span class="text-muted">Brand: </span>${item.phonebrand}</p>
+            <p><span class="text-muted">Model: </span>${item.phonemodel}</p>
           </div>
           <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
             <input min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" />
           </div>
           <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-            <h5 class="mb-0">£${item.price}</h5>
+            <h5 class="mb-0">RS. ${item.price}</h5>
           </div>
           <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+            <button type="button" class="close" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
             <i class="fas fa-trash fa-lg text-danger" onclick="removeCartItem('${item.imagename}')"></i>
           </div>
         </div>
@@ -218,59 +230,10 @@
 </script>
 
 <!-- Contact Us part  -->
-<section class="u-clearfix u-image u-shading u-section-6" id="sec-018f" style="background-image: url('images/gfgfggfggg-min.jpg');" data-image-width="1620" data-image-height="1080">
-  <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-    <div class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1">
-      <div class="u-layout">
-        <div class="u-layout-row">
-          <div class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1">
-            <div class="u-container-layout u-valign-middle u-container-layout-1">
-              <h2 class="u-text u-text-1">Contact Us</h2>
-              <p class="u-text u-text-body-alt-color u-text-2">You can email us, call us, or even message on WhatsApp and Instagram. We will receive your order in every way.</p>
-              <a href="tel:8434106606" class="u-active-white u-border-2 u-border-active-white u-border-hover-white u-border-white u-btn u-btn-round u-button-style u-hover-white u-none u-radius-50 u-text-active-black u-text-hover-black u-btn-1">Contact Us</a>
-            </div>
-          </div>
-          <div class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2">
-            <div class="u-container-layout u-valign-middle u-container-layout-2">
-              <div class="u-form u-form-1">
-                <form action="/home" method="post" class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form" style="padding: 10px" source="email" name="form">
-                  <div class="u-form-email u-form-group u-form-partition-factor-2">
-                    <label for="email-319a" class="u-label u-text-body-alt-color u-label-1">Email</label>
-                    <input type="email" placeholder="Enter a valid email address" id="email-319a" name="email" class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle" required="">
-                  </div>
-                  <div class="u-form-group u-form-name u-form-partition-factor-2">
-                    <label for="name-319a" class="u-label u-text-body-alt-color u-label-2">Name</label>
-                    <input type="text" placeholder="Enter your Name" id="name-319a" name="name" class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle" required="">
-                  </div>
-                  <div class="u-form-address u-form-group u-form-group-3">
-                    <label for="address-452f" class="u-label u-text-body-alt-color u-label-3">Address</label>
-                    <input type="text" placeholder="Enter your address" id="address-452f" name="address" class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle" required="">
-                  </div>
-                  <div class="u-form-group u-form-message">
-                    <label for="message-319a" class="u-label u-text-body-alt-color u-label-4">Message</label>
-                    <textarea placeholder="Enter your message" rows="4" cols="50" id="message-319a" name="message" class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle" required=""></textarea>
-                  </div>
-                  <div class="u-form-group u-form-file">
-                    <label for="file-319a" class="u-label u-text-body-alt-color u-label-5">Image</label>
-                    <input type="file" id="file-319a" name="file" class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle" required="">
-                  </div>
-                  <div class="u-align-left u-form-group u-form-submit">
-                    <a href="#" class="u-active-white u-border-none u-btn u-btn-round u-btn-submit u-button-style u-hover-white u-palette-2-base u-radius-50 u-btn-2">Submit</a>
-                    <input type="submit" value="submit" class="u-form-control-hidden">
-                  </div>
-                  <div class="u-form-send-message u-form-send-success">Thank you! Your message has been sent.</div>
-                  <div class="u-form-send-error u-form-send-message">Unable to send your message. Please fix errors then try again.</div>
-                  <input type="hidden" value="" name="recaptchaResponse">
-                  <input type="hidden" name="formServices" value="5c2d16e3-c5d4-7c6d-a246-fdd40e3912b8">
-                </form>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+
+
+
+
 <script>
   // Adjust background image for other sections
   var elements = document.getElementsByClassName("u-section-1");
@@ -287,6 +250,10 @@
   }
 </script>
 </body>
+
+<footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-b7f2"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+  <p class="u-small-text u-text u-text-variant u-text-1">Website by Earthling Aid Tech</p>
+</div></footer>
 </html>
 
 

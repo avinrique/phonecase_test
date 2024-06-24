@@ -129,6 +129,17 @@
 
   formData.forEach((value, key) => {
     cartItem[key] = value;
+    
+    if(cartItem["case_material"] == "hardcase"){
+      cartItem['price'] = 200
+    }
+    if(cartItem["case_material"] == "softcase"){
+      cartItem['price'] = 150
+    }
+    if(cartItem["case_material"] == "metalcase"){
+      cartItem['price'] = 250
+    }
+
   });
 
   cartItem.id = Date.now();
@@ -143,9 +154,10 @@
   }
 
   cartItems.push(cartItem);
-  alert('Item added to cart:', cartItem.id);
- localStorage.setItem('cartIT', JSON.stringify(cartItems));
   console.log(cartItems)
+  alert('Item added to cart:', cartItem);
+ localStorage.setItem('cartIT', JSON.stringify(cartItems));
+  
 
   }
 
