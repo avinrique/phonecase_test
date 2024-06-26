@@ -17,112 +17,71 @@
     <meta property="og:title" content="Cart">
     <meta property="og:type" content="website">
     <meta data-intl-tel-input-cdn-path="intlTelInput/">
-    <style>
-        .btn-proceed {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            outline: none;
-            box-shadow: none;
-            font-size: 1.25rem;
-            padding: 0.75rem 1.5rem; 
-            margin-top: 20px;
-            border-radius: 0.3rem;
-            transition: background-color 0.3s ease, border-color 0.3s ease; 
-            cursor: pointer;
-        }
-
-        .btn-proceed:hover {
-            background-color: #0056b3; 
-            border-color: black; 
-        }
-
-        .btn-proceed:active {
-            background-color: #004085;
-            border-color: black; 
-        }
-
-        .card {
-            margin-bottom: 20px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        .card img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 0.3rem;
-        }
-
-        .card-body {
-            padding: 1rem;
-        }
-
-        .card-body p {
-            margin: 0.5rem 0;
-        }
-
-        .card-body .lead {
-            font-weight: 500;
-        }
-
-        .card-body .text-muted {
-            font-size: 0.875rem;
-        }
-
-        .card .fas {
-            cursor: pointer;
-            transition: color 0.2s ease;
-        }
-
-        .card .fas:hover {
-            color: #ff0000;
-        }
-
-        .form-control-sm {
-            max-width: 60px;
-            text-align: center;
-        }
-        @media (max-width: 992px) {
-            .navbar-nav {
-                flex-direction: row; /* Display items horizontally */
-            }
-            .navbar-nav .nav-link {
-                text-align: center; /* Center text on smaller screens */
-                padding: 1rem; /* More padding for better touch support */
-            }
+    <body class="u-body u-xl-mode" data-lang="en">
+      <style>
+          .navbar {
+              background-color: #f8f9fa; /* Light gray background */
+              border-bottom: 1px solid #ddd; /* Gray border bottom */
+              box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
           }
-    </style>
-</head>
-<body class="u-body u-xl-mode" data-lang="en">
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Navbar</a>
-      <div class="collapse navbar-collapse show" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" aria-current="page" href="/">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact">Contact us</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="phonecases">Phone cases</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="customcover">Custom cover</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link active" href="#">Go to cart</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+          .navbar-brand {
+              font-size: 1.5rem; /* Larger font size for brand */
+              color: #333; /* Dark text color */
+              font-weight: bold; /* Bold text */
+          }
+          .navbar-nav .nav-link {
+              font-size: 1.2rem; /* Slightly larger font size for links */
+              color: #333; /* Dark text color */
+              padding: 0.5rem 1rem; /* Padding around links */
+              transition: all 0.3s ease; /* Smooth transition */
+              letter-spacing: 0.05rem; /* Slight letter spacing for readability */
+          }
+          .navbar-nav .nav-link:hover {
+              color: #007bff; /* Change color on hover to primary */
+              background-color: #e9ecef; /* Light gray background on hover */
+              border-radius: 4px; /* Rounded corners on hover */
+          }
+          .navbar-toggler {
+              border-color: #403e3e; /* Dark color for toggler border */
+          }
+          .navbar-toggler-icon {
+              background-color: #333; /* Dark color for toggler icon */
+              color: #fff; /* White color for icon */
+          }
+          @media (max-width: 992px) {
+              .navbar-nav {
+                  flex-direction: row; /* Display items horizontally */
+              }
+              .navbar-nav .nav-link {
+                  text-align: center; /* Center text on smaller screens */
+                  padding: 1rem; /* More padding for better touch support */
+                  font-size: 2.5vw; /* Adjust font size for smaller screens */
+              }
+          }
+      </style>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <div class="navbar-collapse collapse show" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="phonecases">Phone cases</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="customcover">Custom cover</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link  active" href="#">Go to cart</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="contact">Contact us</a>
+                      </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
 
 <section class="skrollable skrollable-between u-align-center u-clearfix u-image u-shading u-section-1" src="" id="sec-ce84" data-image-width="1280" data-image-height="854">
     <div class="u-clearfix u-sheet u-sheet-1">
@@ -175,6 +134,18 @@
       const cartItemElement = document.createElement('div');
       cartItemElement.classList.add('card', 'rounded-3', 'mb-4');
       console.log(item)
+      if(item.case_material == "softcase"){
+        item.price = 199
+      }
+      if(item.case_material == "hardcase"){
+        item.price = 250
+      }
+      if(item.case_material == "metalcase"){
+        item.price = 300
+      }
+      if(item.case_material == "glasscase"){
+        item.price =  350
+      }
       cartItemElement.innerHTML = `
       <div class="card-body p-4">
         <div class="row d-flex justify-content-between align-items-center">
@@ -194,7 +165,7 @@
             <h5 class="mb-0">RS. ${item.price}</h5>
           </div>
           <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-            <button type="button" class="close" aria-label="Close">
+            <button type="button" class="close" aria-label="Close" id="close" onclick="removecartm, cv">
               <span aria-hidden="true">&times;</span>
             </button>
             <i class="fas fa-trash fa-lg text-danger" onclick="removeCartItem('${item.imagename}')"></i>
