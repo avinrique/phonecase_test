@@ -165,6 +165,7 @@ app.post('/cart/submit-payment', ssUpload.single('paymentScreenshot'), (req, res
     //image description
     const orderItems = JSON.parse(req.body.orderItems);
     //location
+    const city =  req.body.city
     const state = req.body.state
     const postcode = req.body.postcode
     const address = req.body.address;
@@ -173,27 +174,32 @@ app.post('/cart/submit-payment', ssUpload.single('paymentScreenshot'), (req, res
     const first_name= req.body.uname
     const phone = req.body.phonenumber
     const email = req.body.email
-    const custname = req.body.custname
+    const custnames = req.body.custname
     // payment
     const paymentScreenshot = req.file.filename;
 
     //logging data
     console.log('Address:', address);
-    console.log('Location:', location);
+    console.log('Location:', geolocation);
     console.log(phone ,email)
     console.log('Order Items:', orderItems);
     console.log('Payment Screenshot:', paymentScreenshot);
     const newsOrder = new order_s({
         orderItems,
+
         first_name,
+        email,
+        phone,
+
         address,
         city,
         state,
         postcode,
-        email,
-        phone,
+
         geolocation,
-        custname
+        custnames,
+
+        paymentScreenshot
     });
     newsOrder.save()
         .then(() => {
@@ -204,14 +210,7 @@ app.post('/cart/submit-payment', ssUpload.single('paymentScreenshot'), (req, res
         });
 
 
-    // Respond to the client
-    res.send('Order submitted successfully!');
 
-
-
-
-
-    0
 });
 
 
