@@ -28,7 +28,7 @@ app.set('view engine', 'ejs')
 //database configure ("monodb/mongoose")
 const mongoose = require('mongoose')
 const dbname = "phonecases"
-const dburl = "mongodb+srv://Avin:avin@cluster0.ayk9r.mongodb.net/"
+const dburl = "mongodb+srv://avin:avin@cluster0.fhxczjk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
 
 
@@ -209,10 +209,6 @@ app.post("/addtocart", (req,res)=>{
      .catch(err => {
          res.status(500).send(err);
       });
-
-
-   
-
 })
 app.all('*', (req,res,next)=>{
     res.render('pagenotfound')

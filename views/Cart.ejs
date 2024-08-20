@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <title>Cart</title>
     <link rel="stylesheet" href="css/nicepage.css" media="screen">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/Cart.css" media="screen">
     <script class="u-script" type="text/javascript" src="./../jquery.js" defer=""></script>
     <script class="u-script" type="text/javascript" src="./../nicepage.js" defer=""></script>
@@ -105,7 +106,7 @@
         </div>
     </div>
 </section>
-
+<!-- 
 <section class="h-100" style="background-color: #eee;">
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
@@ -200,7 +201,7 @@
   }
 </script>
 
-<!-- Contact Us part  -->
+//contact us part
 
 
 
@@ -225,6 +226,377 @@
 <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-b7f2"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
   <p class="u-small-text u-text u-text-variant u-text-1">Website by Earthling Aid Tech</p>
 </div></footer>
+</html> -->
+
+
+
+
+<section class="h-100" style="background-color: #eee;">
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-10">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h1 class="fw-normal mb-0 text-black"><b>Your Shopping Cart</b></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="cartItemsContainer"></div>
+
+<div id="cartSummary" class="container h-100 py-5">
+  <div class="row d-flex justify-content-between align-items-center h-100">
+    <div class="col-md-4">
+      <h3>Total: <span id="totalAmount">RS. 0</span></h3>
+    </div>
+    <div class="col-md-4 text-end">
+      <a class="btn btn-primary"  href="/cart/pay">Proceed to Pay</a>
+    </div>
+  </div>
+</div>
+<section class="h-100" style="background-color: #f9f9f9;">
+  <div class="container h-100 py-5">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-10">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h1 class="fw-normal mb-0 text-black"><b>Your Wishlist</b></h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div id="wishlistItemsContainer"></div>
+
+
+
+
+<script>
+ function displayCartItems() {
+  const cartItemsContainer = document.getElementById('cartItemsContainer');
+  const cartSummary = document.getElementById('totalAmount');
+  const cartItems = JSON.parse(localStorage.getItem('cartIT')) || [];
+
+  if (cartItems.length === 0) {
+    cartItemsContainer.innerHTML = '<h3 class="text-center">Currently, your Shopping Cart is empty.</h3>';
+    cartSummary.textContent = 'RS. 0';
+    return;
+  }
+
+  cartItemsContainer.innerHTML = '';
+  let total = 0;
+
+  cartItems.forEach(item => {
+    const prices = {
+      'softcase': 199,
+      'hardcase': 250,
+      'metalcase': 300,
+      'glasscase': 350
+    };
+
+    item.price = prices[item.case_material] || 0;
+
+    const cartItemElement = document.createElement('div');
+    cartItemElement.classList.add('card', 'rounded-3', 'mb-4');
+    cartItemElement.innerHTML = `
+      <div class="card-body p-4">
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col-md-2 col-lg-2 col-xl-2">
+            <img src="/pic/${item.imageurl}" class="img-fluid rounded-3" alt="${item.imagename}">
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-3">
+            <p class="lead fw-normal mb-2">${item.imagename}</p>
+            <p><span class="text-muted">Case Type: </span>${item.case_material}</p>
+            <p><span class="text-muted">Brand: </span>${item.phonebrand}</p>
+            <p><span class="text-muted">Model: </span>${item.phonemodel}</p>
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+            <input min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" id="quantity-${item.imagename}" data-price="${item.price}" oninput="updatePrice('${item.imagename}', this.value)" />
+          </div>
+          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+            <h5 class="mb-0" id="price-${item.imagename}">RS. ${item.price}</h5>
+          </div>
+          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+            <i class="fas fa-trash fa-lg text-danger" onclick="removeCartItem('${item.imagename}')"></i>
+            <i class="fas fa-heart fa-lg text-danger ms-2" onclick="addToWishlist('${item.imagename}')"></i>
+          </div>
+        </div>
+      </div>
+    `;
+
+    cartItemsContainer.appendChild(cartItemElement);
+    total += item.price;
+  });
+
+  cartSummary.textContent = `RS. ${total}`;
+}
+
+function displayWishlistItems() {
+  const wishlistItemsContainer = document.getElementById('wishlistItemsContainer');
+  const wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+
+  if (wishlistItems.length === 0) {
+    wishlistItemsContainer.innerHTML = '<h3 class="text-center">Your Wishlist is empty.</h3>';
+    return;
+  }
+
+  wishlistItemsContainer.innerHTML = '';
+  
+  wishlistItems.forEach(item => {
+    const wishlistItemElement = document.createElement('div');
+    wishlistItemElement.classList.add('card', 'rounded-3', 'mb-4');
+    wishlistItemElement.innerHTML = `
+      <div class="card-body p-4">
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col-md-2 col-lg-2 col-xl-2">
+            <img src="/pic/${item.imageurl}" class="img-fluid rounded-3" alt="${item.imagename}">
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-3">
+            <p class="lead fw-normal mb-2">${item.imagename}</p>
+            <p><span class="text-muted">Case Type: </span>${item.case_material}</p>
+            <p><span class="text-muted">Brand: </span>${item.phonebrand}</p>
+            <p><span class="text-muted">Model: </span>${item.phonemodel}</p>
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+            <button class="btn btn-primary" onclick="moveToCart('${item.imagename}')">Move to Cart</button>
+          </div>
+          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+            <i class="fas fa-trash fa-lg text-danger" onclick="removeFromWishlist('${item.imagename}')"></i>
+          </div>
+        </div>
+      </div>
+    `;
+
+    wishlistItemsContainer.appendChild(wishlistItemElement);
+  });
+}
+
+function updatePrice(itemName, quantity) {
+  const priceElement = document.getElementById(`price-${itemName}`);
+  const quantityInput = document.getElementById(`quantity-${itemName}`);
+  const itemPrice = quantityInput.getAttribute('data-price');
+  const totalPrice = itemPrice * quantity;
+  priceElement.textContent = `RS. ${totalPrice}`;
+}
+function removeCartItem(itemName) {
+  let cartItems = JSON.parse(localStorage.getItem('cartIT')) || [];
+  cartItems = cartItems.filter(item => item.imagename !== itemName);
+  localStorage.setItem('cartIT', JSON.stringify(cartItems));
+  displayCartItems();
+}
+function addToWishlist(itemName) {
+  let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+  let cartItems = JSON.parse(localStorage.getItem('cartIT')) || [];
+  if (wishlistItems.some(item => item.imagename === itemName)) return;
+  cartItems = cartItems.filter(item => item.imagename !== itemName);
+  localStorage.setItem('cartIT', JSON.stringify(cartItems));
+
+  const itemToAdd = cartItems.find(item => item.imagename === itemName);
+  if (itemToAdd) {
+    wishlistItems.push(itemToAdd);
+    localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+  }
+
+  displayCartItems();
+  displayWishlistItems();
+}
+
+function removeFromWishlist(itemName) {
+  let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+  wishlistItems = wishlistItems.filter(item => item.imagename !== itemName);
+  localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+  displayWishlistItems();
+}
+function moveToCart(itemName) {
+  let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+  let cartItems = JSON.parse(localStorage.getItem('cartIT')) || [];
+  if (cartItems.some(item => item.imagename === itemName)) return;
+  wishlistItems = wishlistItems.filter(item => item.imagename !== itemName);
+  localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+
+
+  const itemToAdd = wishlistItems.find(item => item.imagename === itemName);
+  if (itemToAdd) {
+    cartItems.push(itemToAdd);
+    localStorage.setItem('cartIT', JSON.stringify(cartItems));
+  }
+
+  displayCartItems();
+  displayWishlistItems()
+}
+
+function proceedToPay() {
+  // Functionality to handle payment process
+  alert('Proceeding to Pay');
+}
+
+window.onload = () => {
+  displayCartItems();
+  displayWishlistItems();
+};
+function displayCartItems() {
+  const cartItemsContainer = document.getElementById('cartItemsContainer');
+  const cartSummary = document.getElementById('totalAmount');
+  const cartItems = JSON.parse(localStorage.getItem('cartIT')) || [];
+  if (cartItems.length === 0) {
+    cartItemsContainer.innerHTML = '<h3 class="text-center">Currently, your Shopping Cart is empty.</h3>';
+    cartSummary.textContent = 'RS. 0';
+    return;
+  }
+  cartItemsContainer.innerHTML = '';
+  let total = 0;
+  cartItems.forEach(item => {
+    const prices = {
+      'softcase': 199,
+      'hardcase': 250,
+      'metalcase': 300,
+      'glasscase': 350
+    };
+    item.price = prices[item.case_material] || 0;
+    const cartItemElement = document.createElement('div');
+    cartItemElement.classList.add('card', 'rounded-3', 'mb-4');
+    cartItemElement.innerHTML = `
+      <div class="card-body p-4">
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col-md-2 col-lg-2 col-xl-2">
+            <img src="/pic/${item.imageurl}" class="img-fluid rounded-3" alt="${item.imagename}">
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-3">
+            <p class="lead fw-normal mb-2">${item.imagename}</p>
+            <p><span class="text-muted">Case Type: </span>${item.case_material}</p>
+            <p><span class="text-muted">Brand: </span>${item.phonebrand}</p>
+            <p><span class="text-muted">Model: </span>${item.phonemodel}</p>
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+            <input min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" id="quantity-${item.imagename}" data-price="${item.price}" oninput="updatePrice('${item.imagename}', this.value)" />
+          </div>
+          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
+            <h5 class="mb-0" id="price-${item.imagename}">RS. ${item.price}</h5>
+          </div>
+          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+            <i class="fas fa-trash fa-lg text-danger" onclick="removeCartItem('${item.imagename}')"></i>
+            <i class="fas fa-heart fa-lg text-danger ms-2" onclick="addToWishlist('${item.imagename}')"></i>
+          </div>
+        </div>
+      </div>
+    `;
+
+    cartItemsContainer.appendChild(cartItemElement);
+    total += item.price;
+  });
+  cartSummary.textContent = `RS. ${total}`;
+}
+function displayWishlistItems() {
+  const wishlistItemsContainer = document.getElementById('wishlistItemsContainer');
+  const wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+  if (wishlistItems.length === 0) {
+    wishlistItemsContainer.innerHTML = '<h3 class="text-center">Your Wishlist is empty.</h3>';
+    return;
+  }
+  wishlistItemsContainer.innerHTML = '';
+  wishlistItems.forEach(item => {
+    const wishlistItemElement = document.createElement('div');
+    wishlistItemElement.classList.add('card', 'rounded-3', 'mb-4');
+    wishlistItemElement.innerHTML = `
+      <div class="card-body p-4">
+        <div class="row d-flex justify-content-between align-items-center">
+          <div class="col-md-2 col-lg-2 col-xl-2">
+            <img src="/pic/${item.imageurl}" class="img-fluid rounded-3" alt="${item.imagename}">
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-3">
+            <p class="lead fw-normal mb-2">${item.imagename}</p>
+            <p><span class="text-muted">Case Type: </span>${item.case_material}</p>
+            <p><span class="text-muted">Brand: </span>${item.phonebrand}</p>
+            <p><span class="text-muted">Model: </span>${item.phonemodel}</p>
+          </div>
+          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
+            <button class="btn btn-primary" onclick="moveToCart('${item.imagename}')">Move to Cart</button>
+          </div>
+          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
+            <i class="fas fa-trash fa-lg text-danger" onclick="removeFromWishlist('${item.imagename}')"></i>
+          </div>
+        </div>
+      </div>
+    `;
+
+    wishlistItemsContainer.appendChild(wishlistItemElement);
+  });
+}
+function updatePrice(itemName, quantity) {
+  const priceElement = document.getElementById(`price-${itemName}`);
+  const quantityInput = document.getElementById(`quantity-${itemName}`);
+  const itemPrice = quantityInput.getAttribute('data-price');
+  const totalPrice = itemPrice * quantity;
+  priceElement.textContent = `RS. ${totalPrice}`;
+}
+function removeCartItem(itemName) {
+  let cartItems = JSON.parse(localStorage.getItem('cartIT')) || [];
+  cartItems = cartItems.filter(item => item.imagename !== itemName);
+  localStorage.setItem('cartIT', JSON.stringify(cartItems));
+  displayCartItems();
+}
+function addToWishlist(itemName) {
+  let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+  let cartItems = JSON.parse(localStorage.getItem('cartIT')) || [];
+
+  if (wishlistItems.some(item => item.imagename === itemName)) return;
+  const itemToAdd = cartItems.find(item => item.imagename === itemName);
+  if (itemToAdd) {
+    cartItems = cartItems.filter(item => item.imagename !== itemName);
+    localStorage.setItem('cartIT', JSON.stringify(cartItems));
+    wishlistItems.push(itemToAdd);
+    localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+  }
+  displayCartItems();
+  displayWishlistItems(); 
+}
+
+
+
+function removeFromWishlist(itemName) {
+  let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+  wishlistItems = wishlistItems.filter(item => item.imagename !== itemName);
+  localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+  displayWishlistItems();
+}
+function moveToCart(itemName) {
+  let wishlistItems = JSON.parse(localStorage.getItem('wishlist')) || [];
+  let cartItems = JSON.parse(localStorage.getItem('cartIT')) || [];
+  if (cartItems.some(item => item.imagename === itemName)) return;
+  const itemToAdd = wishlistItems.find(item => item.imagename === itemName);
+  if (itemToAdd) {
+    wishlistItems = wishlistItems.filter(item => item.imagename !== itemName);
+    localStorage.setItem('wishlist', JSON.stringify(wishlistItems));
+    cartItems.push(itemToAdd);
+    localStorage.setItem('cartIT', JSON.stringify(cartItems));
+  }
+
+  displayCartItems();
+  displayWishlistItems()
+}
+
+
+function proceedToPay() {
+
+  alert('Proceeding to Pay');
+}
+
+window.onload = () => {
+  displayCartItems();
+  displayWishlistItems();
+};
+
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-b7f2">
+  <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+    <p class="u-small-text u-text u-text-variant u-text-1">Website by Earthling Aid Tech</p>
+  </div>
+</footer>
+
+</body>
 </html>
-
-
