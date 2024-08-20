@@ -159,7 +159,8 @@ app.post('/orderupload', customOrderUpload.single('custom_image'), (req, res) =>
       const postcode = req.body.postcode;
       const address = req.body.address
       const geolocation =  req.body.geolocation
-      console.log(first_name,phone,custom_image,email,case_material,phone_brand,phone_model,state,city,postcode,address,geolocation)
+      const custname = req.body.custname
+      console.log(first_name,phone,custom_image,email,case_material,phone_brand,phone_model,state,city,postcode,address,geolocation , custname)
       const newOrder = new order_s({
           custom_image ,
           case_material,
@@ -173,6 +174,7 @@ app.post('/orderupload', customOrderUpload.single('custom_image'), (req, res) =>
           email,
           phone,
           geolocation,
+          custname
       });
       newOrder.save()
           .then(() => {

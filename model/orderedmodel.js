@@ -11,6 +11,9 @@ const orderSchema = new mongoose.Schema({
     custom_image :{
         type:String
     },
+    custname :{type:String
+
+    },
     case_material :{
         type: String,
         enum : ["softcase" , "hardcase" , "glasscase"]
