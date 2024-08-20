@@ -1,7 +1,8 @@
 //modules
 const order_s = require("./model/orderedmodel")
+const order_ss = require("./model/orderedmodel")
 const carts = require("./model/cartmodel")
-
+const crypto = require('crypto');
 require('dotenv').config()
 const express = require('express')
 const app = express()
@@ -46,7 +47,6 @@ var path = require('path');
 const multer = require('multer')
 
 
-
 const orderstorage = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, 'public/customorder'); // 'public' is the root directory, 'pic' is the subdirectory
@@ -70,10 +70,26 @@ const storage = multer.diskStorage({
       cb(null, uniqueFileName);
   }
 });
-
-
 const upload = multer({ storage: storage });
  module.exports = upload
+ const fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'public/uploads');
+    },
+    filename: (req, file, cb) => {
+        // Generate a unique filename based on current timestamp and a random string
+        const uniqueSuffix = Date.now() + '-' + crypto.randomBytes(6).toString('hex');
+        const fileExtension = path.extname(file.originalname);
+        cb(null, uniqueSuffix + fileExtension);
+    }
+});
+const ssUpload = multer({ storage: fileStorage });
+ 
+module.exports = ssUpload
+
+
+
+
 
 
 
@@ -144,6 +160,60 @@ app.post('/upload', upload.single('design_image'), (req, res) => {
       res.send('No image selected.');
   }
 });
+
+app.post('/cart/submit-payment', ssUpload.single('paymentScreenshot'), (req, res) => {
+    //image description
+    const orderItems = JSON.parse(req.body.orderItems);
+    //location
+    const state = req.body.state
+    const postcode = req.body.postcode
+    const address = req.body.address;
+    const geolocation = req.body.location;
+    //name and others
+    const first_name= req.body.uname
+    const phone = req.body.phonenumber
+    const email = req.body.email
+    const custname = req.body.custname
+    // payment
+    const paymentScreenshot = req.file.filename;
+
+    //logging data
+    console.log('Address:', address);
+    console.log('Location:', location);
+    console.log(phone ,email)
+    console.log('Order Items:', orderItems);
+    console.log('Payment Screenshot:', paymentScreenshot);
+    const newsOrder = new order_s({
+        orderItems,
+        first_name,
+        address,
+        city,
+        state,
+        postcode,
+        email,
+        phone,
+        geolocation,
+        custname
+    });
+    newsOrder.save()
+        .then(() => {
+            res.send('Design uploaded and saved to the database.');
+        })
+        .catch(err => {
+            res.status(500).send(err);
+        });
+
+
+    // Respond to the client
+    res.send('Order submitted successfully!');
+
+
+
+
+
+    0
+});
+
 
 app.post('/orderupload', customOrderUpload.single('custom_image'), (req, res) => {
   if (req.file) {
