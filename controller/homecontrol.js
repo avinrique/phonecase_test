@@ -22,4 +22,9 @@ exports.getcontactcontrol = (req,res)=>{
 exports.getcustomordercontrol = (req,res)=>{
     res.render("order")
 }
+exports.getadminlogincontrol = async(req,res)=>{
+    res.render("adminlogin")
+}
+
+
 

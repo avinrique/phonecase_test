@@ -250,13 +250,17 @@ button:hover{
       </label>
       <label>
         <span>custom image<span class="required">*</span></span>
-        <input type="file" name="custom_image" accept="image/*" required> 
-      </label>
-      <label>
         <label>
           <span>quantity <span class="required">*</span></span>
           <input type="number" name="quantity" required value="1"> 
         </label>
+        <input type="file" name="custom_image" accept="image/*" required> 
+        <div class="qr-container">
+          <img src="/images/payqr.png" alt="QR Code" class="img-fluid">
+          <p class="mt-2">Scan the QR code to complete the payment.</p>
+      </div>
+      </label>
+      <label>
         <span>Payment screenshot<span class="required">*</span></span>
         <input type="file" name="payment_screenshot" accept="image/*" required> 
       </label>
@@ -295,7 +299,6 @@ button:hover{
       </label>
       <button class="btn btn-danger" type="submit">submit</button>
       <input type="hidden" name="price" id="case_price" value="0">
-
     </form>
    </div>
   </div>
@@ -309,40 +312,23 @@ button:hover{
       } else { 
         x.innerHTML = "Geolocation is not supported by this browser.";
       }
-    
-
     }
-
-
-    
     function showPosition(position) {
       x.value = "Latitude: " + position.coords.latitude + 
       "\nLongitude: " + position.coords.longitude;
-      
       var stateInput = document.getElementById("state");
       stateInput.removeAttribute("required");
-
       var cityInput = document.getElementById("city");
       cityInput.removeAttribute("required");
-
       var postcodeInput = document.getElementById("postcode");
       postcodeInput.removeAttribute("required");
-
       var addressInput = document.getElementById("address");
       addressInput.removeAttribute("required");
-
-
-
-
     }
-
-
-    
     </script>
     <footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-b7f2"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
         <p class="u-small-text u-text u-text-variant u-text-1">Website by Earthling Aid Tech</p>
       </div></footer>
-  
             <style>
               .whatsapp_float{
                 position: fixed;
@@ -354,10 +340,9 @@ button:hover{
               <a href="https://wa.me/918434106606" target="_blank">
                 <img src="images/whatsappicon.png" alt="" width="50px" class="whatsapp_float_btn" >
               </a>
-      
             </div>
-            
             <script>
+              
   const phoneData = [
 
 // for metalcase

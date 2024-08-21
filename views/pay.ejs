@@ -196,6 +196,8 @@
     </section>
 
     <script>
+
+
         document.addEventListener('DOMContentLoaded', function() {
             const cartItems = JSON.parse(localStorage.getItem('cartIT')) || [];
             const orderSummaryElement = document.getElementById('orderSummary');
@@ -204,6 +206,7 @@
     
             if (cartItems.length === 0) {
                 orderSummaryElement.innerHTML = '<p>Your cart is empty.</p>';
+                window.location.href = '/'
             } else {
                 cartItems.forEach(item => {
                     const prices = {

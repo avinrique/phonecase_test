@@ -5,6 +5,7 @@ const crypto = require('crypto');
 require('dotenv').config()
 const express = require('express')
 const app = express()
+const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser')
 const ejs = require('ejs')
 const uuid =  require('uuid')
@@ -30,7 +31,8 @@ const mongoose = require('mongoose')
 const dbname = "phonecases"
 const dburl = "mongodb+srv://avin:avin@cluster0.fhxczjk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 
-
+app.use(cookieParser());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 mongoose.connect(dburl+dbname,
 {useNewUrlParser: true},
@@ -138,6 +140,19 @@ app.use('/user' , userauth)
 */
 //
 
+
+app.post('/adminlogin', (req, res) => {
+  const { username, password } = req.body;
+
+  // Replace with your own user validation logic
+  if (username === 'admin' && password === 'password123') {
+      // Set a cookie
+      res.cookie('adminAuth', 'true', { httpOnly: true, maxAge: 3600000 }); // Cookie expires in 1 hour
+      res.redirect('/admin');
+  } else {
+      res.send('Invalid credentials. Please try again.');
+  }
+});
 
 app.post('/upload', upload.single('design_image'), (req, res) => {
   if (req.file) {

@@ -24,5 +24,112 @@
           </select>
         <input type="submit" value="Upload Design">
     </form>
+
+
+    <!-- <div class="container">
+        <h2>Order List</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>First Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Postcode</th>
+                    <th>Geolocation</th>
+                    <th>image</th>
+                    <th>Payment Screenshot</th>
+                    <th>Delivery Status</th>
+                    <th>Genuine Paid</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% orders.forEach(order => { %>
+                    <tr>
+                        
+                        <td><%= order._id %></td>
+                        <td><%= order.first_name %></td>
+                        <td><%= order.email %></td>
+                        <td><%= order.phone %></td>
+                        <td><%= order.address %></td>
+                        <td><%= order.city %></td>
+                        <td><%= order.state %></td>
+                        <td><%= order.postcode %></td>
+                        <td><%= order.geolocation %></td>
+                        <td><img src="/pic/<%= order.imageurl %>" alt="image" width="100"></td>
+                        <td><img src="/uploads/<%= order.paymentScreenshot %>" alt="Payment Screenshot" width="100"></td>
+                        <td><%= order.delevery_status ? 'Delivered' : 'Pending' %></td>
+                        <td><%= order.genuine_paid ? 'Yes' : 'No' %></td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div> -->
+
+    <div class="container">
+        <h2>Order List</h2>
+        <table border="1">
+            <thead>
+                <tr>
+                    
+                    <th>First Name</th>
+                    <th>Email</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Postcode</th>
+                    <th>Geolocation</th>
+                    <th>Payment Screenshot</th>
+                    <th>Delivery Status</th>
+                    <th>Genuine Paid</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                <% orders.forEach(order => { %>
+                    <tr>
+                       
+                        <td><%= order.first_name %></td>
+                        <td><%= order.email %></td>
+                        <td><%= order.phone %></td>
+                        <td><%= order.address %></td>
+                        <td><%= order.city %></td>
+                        <td><%= order.state %></td>
+                        <td><%= order.postcode %></td>
+                        <td><%= order.geolocation %></td>
+                        <td><img src="/uploads/<%= order.paymentScreenshot %>" alt="Payment Screenshot" width="100"></td>
+                        <td><%= order.delevery_status ? 'Delivered' : 'Pending' %></td>
+                        <td><%= order.genuine_paid ? 'Yes' : 'No' %></td>
+                        <td>
+                            <ul>
+                                <% order.orderItems.forEach(item => { %>
+                                    <li>
+                                        <strong>Item Name:</strong> <%= item.imagename %> <br>
+                                        <strong>Case Material:</strong> <%= item.case_material %> <br>
+                                        <strong>Phone Brand:</strong> <%= item.phonebrand %> <br>
+                                        <strong>Phone Model:</strong> <%= item.phonemodel %> <br>
+                                        <strong>Quantity:</strong> <%= item.quantity %> <br>
+                                        <strong>Price:</strong> <%= item.price %> <br>
+                                        <strong>Image:</strong> 
+                                        <% 
+                                            const primaryImagePath = `/pic/${item.imageurl}`; 
+                                            const fallbackImagePath = `/customorder/${item.imageurl}`; 
+                                        %>
+                                        <img src="<%= primaryImagePath %>" alt="Ordered Item" width="100" onerror="this.onerror=null; this.src='<%= fallbackImagePath %>';">
+                                    </li>
+                                <% }) %>
+                            </ul>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
 </body>
 </html>
