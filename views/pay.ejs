@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -130,6 +130,148 @@
             });
         });
     </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <style>
+        .qr-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-section {
+            margin-top: 20px;
+        }
+        .order-item img {
+            max-width: 100px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <section class="container mt-5">
+        <h1 class="text-center mb-4">Complete Your Payment</h1>
+        
+        <div class="qr-container">
+            <img src="/images/payqr.png" alt="QR Code" class="img-fluid">
+            <p class="mt-2">Scan the QR code to complete the payment.</p>
+        </div>
+
+        <form id="paymentForm" action="/cart/submit-payment" method="POST" enctype="multipart/form-data">
+            <div class="form-section">
+                <h3>Order Summary</h3>
+                <div id="orderSummary"></div>
+                <input type="hidden" name="orderItems" id="orderItemsData">
+            </div>
+
+            <div class="form-section">
+                <h3>Upload Payment Screenshot</h3>
+                <input type="file" name="paymentScreenshot" accept="image/*" class="form-control">
+            </div>
+            <div class="form-section">
+                <h3>Name & Phone Number</h3>
+                <input name="uname" class="form-control" placeholder="Name" required>
+                <input name="phonenumber" class="form-control" placeholder="Phone Number" type="number" required>
+                <input name="email" class="form-control" placeholder="Email" required type="email">
+            </div>
+
+            <div class="form-section">
+                <h3>Address</h3>
+                <textarea name="address" class="form-control" rows="3" placeholder="Enter your address here" required></textarea>
+                <button type="button" class="btn btn-secondary mt-2" id="getLocation">Use Current Location</button>
+                <input type="hidden" name="location" id="locationData">
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-4">Submit</button>
+        </form>
+    </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cartItems = JSON.parse(localStorage.getItem('cartIT')) || [];
+            const orderSummaryElement = document.getElementById('orderSummary');
+            const orderItemsData = [];
+            let totalAmount = 0;
+    
+            if (cartItems.length === 0) {
+                orderSummaryElement.innerHTML = '<p>Your cart is empty.</p>';
+            } else {
+                cartItems.forEach(item => {
+                    const prices = {
+                        'softcase': 199,
+                        'hardcase': 250,
+                        'metalcase': 300,
+                        'glasscase': 350
+                    };
+                    const itemPrice = prices[item.case_material] || 0;
+                    const quantity = item.quantity || 1; // Default quantity to 1 if not set
+                    const totalItemPrice = itemPrice * quantity;
+                    totalAmount += totalItemPrice;
+    
+                    orderItemsData.push({
+                        imagename: item.imagename,
+                        case_material: item.case_material,
+                        phonebrand: item.phonebrand,
+                        phonemodel: item.phonemodel,
+                        imageurl: item.imageurl,
+                        price: itemPrice,
+                        quantity: quantity
+                    });
+    
+                    orderSummaryElement.innerHTML += `
+                        <div class="card mb-2 order-item">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img src="/pic/${item.imageurl}" alt="${item.imagename}">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <h5>${item.imagename}</h5>
+                                        <p>Case Type: ${item.case_material}</p>
+                                        <p>Brand: ${item.phonebrand}</p>
+                                        <p>Model: ${item.phonemodel}</p>
+                                        <p>Quantity: ${quantity}</p>
+                                        <p>Price: RS. ${itemPrice} x ${quantity} = RS. ${totalItemPrice}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+                orderSummaryElement.innerHTML += `<h4>Total: RS. ${totalAmount}</h4>`;
+            }
+    
+            document.getElementById('orderItemsData').value = JSON.stringify(orderItemsData);
+    
+            // Clear the cart items upon form submission
+            document.getElementById('paymentForm').addEventListener('submit', function() {
+                localStorage.removeItem('cartIT'); // Clear the cart items
+            });
+    
+            document.getElementById('getLocation').addEventListener('click', function() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function(position) {
+                        document.getElementById('locationData').value = `${position.coords.latitude},${position.coords.longitude}`;
+                        alert('Location captured.');
+                    }, function() {
+                        alert('Could not get location.');
+                    });
+                } else {
+                    alert('Geolocation is not supported by this browser.');
+                }
+            });
+        });
+    </script>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>

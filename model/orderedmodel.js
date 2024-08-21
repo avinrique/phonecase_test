@@ -10,16 +10,17 @@ const orderItemSchema = new mongoose.Schema({
     phonebrand: { type: String, required: true },
     phonemodel: { type: String, required: true },
     imageurl: { type: String, required: true },
-    // quantity :{ type:Number , required:true},
-    // price: { type: Number, required: true }
+    quantity :{ type:Number , required:true},
+    price: { type: Number, required: true }
 });
 const orderSchema = new mongoose.Schema({
     orderItems: [orderItemSchema],
-
+    genuine_paid: {type:Boolean,default: false },
+    delevery_status: {type:Boolean,default: false },
+    first_name :{type: String},
     custnames :{type:String},
     email : {type : String },
     phone : {type : Number},
-
 
     
     address : {type : String },

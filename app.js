@@ -1,6 +1,5 @@
 //modules
 const order_s = require("./model/orderedmodel")
-const order_ss = require("./model/orderedmodel")
 const carts = require("./model/cartmodel")
 const crypto = require('crypto');
 require('dotenv').config()
@@ -46,21 +45,7 @@ var fs = require('fs');
 var path = require('path');
 const multer = require('multer')
 
-
-const orderstorage = multer.diskStorage({
-  destination: (req, file, cb) => {
-      cb(null, 'public/customorder'); // 'public' is the root directory, 'pic' is the subdirectory
-  },
-  filename: (req, file, cb) => {
-      const uniqueFileName = `${uuid.v4()}${path.extname(file.originalname)}`;
-      cb(null, uniqueFileName);
-  }
-});
-const customOrderUpload = multer({ storage:orderstorage  });
- module.exports = customOrderUpload
-
-
-
+//order
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
       cb(null, 'public/pic'); // 'public' is the root directory, 'pic' is the subdirectory
@@ -72,6 +57,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
  module.exports = upload
+
+
  const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
         cb(null, 'public/uploads');
@@ -87,6 +74,25 @@ const ssUpload = multer({ storage: fileStorage });
  
 module.exports = ssUpload
 
+const storages = multer.diskStorage({
+    destination: (req, file, cb) => {
+      if (file.fieldname === 'custom_image') {
+        cb(null, 'public/customorder'); // Destination for custom_image
+      } else if (file.fieldname === 'payment_screenshot') {
+        cb(null, 'public/uploads'); // Destination for payment_screenshot
+      } else {
+        cb(new Error('Unknown field'), false);
+      }
+    },
+    filename: (req, file, cb) => {
+      const uniqueSuffix = Date.now() + '-' + crypto.randomBytes(6).toString('hex');
+      cb(null, uniqueSuffix + path.extname(file.originalname));
+    }
+  });
+  const uploades = multer({ storage: storages });
+
+// Export the upload instance (if needed)
+module.exports = uploades;
 
 
 
@@ -203,7 +209,7 @@ app.post('/cart/submit-payment', ssUpload.single('paymentScreenshot'), (req, res
     });
     newsOrder.save()
         .then(() => {
-            res.send('Design uploaded and saved to the database.');
+            res.redirect("/cart");
         })
         .catch(err => {
             res.status(500).send(err);
@@ -213,49 +219,53 @@ app.post('/cart/submit-payment', ssUpload.single('paymentScreenshot'), (req, res
 
 });
 
-
-app.post('/orderupload', customOrderUpload.single('custom_image'), (req, res) => {
-  if (req.file) {
-      const first_name = req.body.fname;
-      const phone= req.body.phone;
-      const custom_image = req.file.filename;
-      const email = req.body.email;
-      const case_material = req.body.case_material;
-      const phone_brand = req.body.phone_brand;
-      const phone_model = req.body.phone_model
-      const state = req.body.state;
-      const city = req.body.city;
-      const postcode = req.body.postcode;
-      const address = req.body.address
-      const geolocation =  req.body.geolocation
-      const custname = req.body.custname
-      console.log(first_name,phone,custom_image,email,case_material,phone_brand,phone_model,state,city,postcode,address,geolocation , custname)
+app.post('/orderupload', uploades.fields([
+    { name: 'custom_image', maxCount: 1 },
+    { name: 'payment_screenshot', maxCount: 1 }
+  ]), (req, res) => {
+    if (req.files) {
+      const custom_image = req.files['custom_image'] ? req.files['custom_image'][0].filename : null;
+      const paymentScreenshot = req.files['payment_screenshot'] ? req.files['payment_screenshot'][0].filename : null;
+  
+      const { fname: first_name, phone, email, case_material, phone_brand, phone_model, state, city, postcode, address, geolocation, custname } = req.body;
+  
+      console.log(first_name, phone, custom_image, email, case_material, phone_brand, phone_model, state, city, postcode, address, geolocation, custname);
+  
       const newOrder = new order_s({
-          custom_image ,
+        orderItems: {
+          imagename: custom_image,  
           case_material,
-          phone_brand,
-          phone_model,
-          first_name,
-          address,
-          city,
-          state,
-          postcode,
-          email,
-          phone,
-          geolocation,
-          custname
+          phonebrand: phone_brand,
+          phonemodel: phone_model,
+          imageurl: `${custom_image}`, 
+          quantity : req.body.quantity,
+          price : req.body.price
+
+        },
+        first_name,
+        address,
+        city,
+        state,
+        postcode,
+        email,
+        phone,
+        geolocation,
+        custname,
+        paymentScreenshot
       });
+  
       newOrder.save()
-          .then(() => {
-              res.send('Design uploaded and saved to the database.');
-          })
-          .catch(err => {
-              res.status(500).send(err);
-          });
-  } else {
-      res.send('No image selected.');
-  }
-});
+        .then(() => {
+          res.redirect("/cart")
+        })
+        .catch(err => {
+          res.status(500).send(err);
+        });
+    } else {
+      res.send('No images selected.');
+    }
+  });
+
 app.post("/addtocart", (req,res)=>{
     phone_model= req.body.phonemodel
     phone_brand= req.body.phonebrand
