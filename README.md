@@ -16,12 +16,12 @@ Follow these steps to set up the project locally:
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/yourusername/CustomisedPhoneCase.git
+    git clone https://github.com/avinrique/phonecase_test
     ```
 
 2. **Navigate to the project directory**:
     ```bash
-    cd CustomisedPhoneCase
+    cd phonecase_test
     ```
 
 3. **Install dependencies**:
