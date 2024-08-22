@@ -15,24 +15,24 @@ CustomisedPhoneCase is an e-commerce website that allows users to order customiz
 Follow these steps to set up the project locally:
 
 1. **Clone the repository**:
-   123 ```bash
-   123 git clone https://github.com/yourusername/CustomisedPhoneCase.git
-   123 ```
+    ```bash
+    git clone https://github.com/yourusername/CustomisedPhoneCase.git
+    ```
 
 2. **Navigate to the project directory**:
-   123 ```bash
-   123 cd CustomisedPhoneCase
-   123 ```
+    ```bash
+    cd CustomisedPhoneCase
+    ```
 
 3. **Install dependencies**:
-   123 ```bash
-   123 npm install
-   123 ```
+    ```bash
+    npm install
+    ```
 
 4. **Start the development server**:
-   123 ```bash
-   123 npm start
-   123 ```
+    ```bash
+    npm start
+    ```
 
 ## Usage
 
