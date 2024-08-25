@@ -57,8 +57,9 @@
             margin: 0;
             color: #6c757d;
         }
-        .order-summary {
-            margin-bottom: 30px;
+        .order-summary, .upload-payment-screenshot {
+            width: 75%;
+            margin: 0 auto;
         }
         .total-amount {
             font-size: 1.5rem;
@@ -76,41 +77,52 @@
 <body>
     <section class="container mt-5">
         <h1 class="text-center mb-4">Complete Your Payment</h1>
-        
-        <div class="qr-container">
-            <div class="designer-box">
-                <img src="/images/payqr.png" alt="QR Code" class="img-fluid">
-            </div>
-            <p class="mt-3">Scan the QR code to complete the payment.</p>
-        </div>
 
         <form id="paymentForm" action="/cart/submit-payment" method="POST" enctype="multipart/form-data">
-            <div class="form-section order-summary">
-                <h3><b>Order Summary</b></h3>
-                <div id="orderSummary"></div>
-                <input type="hidden" name="orderItems" id="orderItemsData">
-            </div>
-
-            <div class="form-section" style="width: 85%; margin: 0 auto;">
-                <h3>Upload Payment Screenshot<span class="required">*</span></h3>
-                <input type="file" name="paymentScreenshot" accept="image/*" class="form-control" required style="width: 75%; margin-left: 7%; margin-bottom: 15px;">
-            </div>
             
+            <!-- Name & Phone Number Section -->
             <div class="form-section" style="width: 85%; margin: 0 auto;">
-                <h3>Name & Phone Number<span class="required">*</span></h3>
+                <h3>Personal Details<span class="required">*</span></h3>
                 <input name="uname" class="form-control" placeholder="Name" required style="width: 75%; margin-left: 7%; margin-bottom: 15px;">
                 <input name="phonenumber" class="form-control" placeholder="Phone Number" type="number" required style="width: 75%; margin-left: 7%; margin-bottom: 15px;">
                 <input name="email" class="form-control" placeholder="Email" required type="email" style="width: 75%; margin-left: 7%; margin-bottom: 15px;">
             </div>
             
+            <!-- Address Section -->
             <div class="form-section" style="width: 85%; margin: 0 auto;">
                 <h3>Address<span class="required">*</span></h3>
-                <textarea name="address" class="form-control" rows="3" placeholder="Enter your address here" required style="width: 75%; margin-left: 7%; margin-bottom: 15px;"></textarea>
+                <input name="addressline" class="form-control" placeholder="Address Line" required style="width: 75%; margin-left: 7%; margin-bottom: 15px;">
+                <input name="city" class="form-control" placeholder="City" required style="width: 75%; margin-left: 7%; margin-bottom: 15px;">
+                <input name="state" class="form-control" placeholder="State" required style="width: 75%; margin-left: 7%; margin-bottom: 15px;">
+                <input name="pincode" class="form-control" placeholder="Pincode" required style="width: 75%; margin-left: 7%; margin-bottom: 15px;">
+                <input name="country" class="form-control" placeholder="Country" required style="width: 75%; margin-left: 7%; margin-bottom: 15px;">
                 <button type="button" class="btn btn-secondary mt-2" id="getLocation" style="margin-left: 7%;">Use Current Location</button>
                 <input type="hidden" name="location" id="locationData">
+            </div><br><br>
+
+            <!-- Order Summary Section -->
+            <div class="form-section order-summary">
+                <h3><b>Order Summary</b></h3>
+                <div id="orderSummary"></div>
+                <input type="hidden" name="orderItems" id="orderItemsData">
+            </div><br><br>
+
+            <!-- QR Code Section -->
+            <div class="qr-container">
+                <div class="designer-box">
+                    <img src="/images/payqr.png" alt="QR Code" class="img-fluid">
+                </div>
+                <p class="mt-3">Scan the QR code to complete the payment.</p>
+            </div>
+
+            <!-- Upload Payment Screenshot Section -->
+            <div class="form-section upload-payment-screenshot">
+                <h3>Upload Payment Screenshot<span class="required">*</span></h3>
+                <input type="file" name="paymentScreenshot" accept="image/*" class="form-control" required style="width: 100%; margin-bottom: 15px;">
             </div>
             
-            <button type="submit" class="btn btn-primary mt-4 mb-5" style="display: block; width: 20%; margin-left: 7.5%; margin-bottom: 20px; text-align: center;">Submit</button>   
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary mt-4 mb-5" style="display: block; width: 14%; margin-left: 12.5%; margin-bottom: 20px; text-align: center;">Submit</button>   
         </form>
     </section>
 
