@@ -84,153 +84,28 @@
             </div>
         </nav>
 
-<section class="skrollable skrollable-between u-align-center u-clearfix u-image u-shading u-section-1" src="" id="sec-ce84" data-image-width="1280" data-image-height="854">
-    <div class="u-clearfix u-sheet u-sheet-1">
+<section class="skrollable skrollable-between u-align-center u-clearfix u-image u-shading u-section-1" src="" id="carousel_74d8" data-image-width="1280" data-image-height="854">
+      <div class="u-clearfix u-sheet u-sheet-1">
         <h1 class="u-text u-text-default u-text-1" data-animation-name="customAnimationIn" data-animation-duration="1000">Case that reflects your memories</h1>
-        <p class="u-large-text u-text u-text-variant u-text-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">We know, your heart is broken , now save your phone from getting into pieces</p>
+        <p class="u-large-text u-text u-text-variant u-text-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">We know, your heart is broken , now save your phone from geting into peices</p>
         <div class="u-clearfix u-layout-custom-sm u-layout-custom-xs u-layout-wrap u-layout-wrap-1">
-            <div class="u-layout">
-                <div class="u-layout-row">
-                    <div class="u-align-right u-container-align-right-sm u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-                        <div class="u-container-layout u-valign-top u-container-layout-1">
-                            <a href="#" class="u-align-right-sm u-align-right-xs u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-palette-2-base u-radius-50 u-btn-1">Call Us</a>
-                        </div>
-                    </div>
-                    <div class="u-align-left u-container-align-left-sm u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
-                        <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-2">
-                            <a href="#" class="u-active-white u-align-left-sm u-align-left-xs u-border-2 u-border-active-white u-border-hover-white u-border-white u-btn u-btn-round u-button-style u-hover-white u-none u-radius-50 u-text-active-black u-text-hover-black u-btn-2">Get in touch VIA Instagram</a>
-                        </div>
-                    </div>
+          <div class="u-layout">
+            <div class="u-layout-row">
+              <div class="u-align-right u-container-align-right-sm u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
+                <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-1">
+                  <a href="https://wa.me/00918434106606" class="u-align-right-sm u-align-right-xs u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-palette-2-base u-radius-50 u-btn-1">Call Us</a>
                 </div>
+              </div>
+              <div class="u-align-left u-container-align-left-sm u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2" data-animation-name="customAnimationIn" data-animation-duration="1500" data-animation-delay="250">
+                <div class="u-container-layout u-valign-top-lg u-valign-top-md u-valign-top-sm u-valign-top-xl u-container-layout-2">
+                  <a href="/customcover" class="u-active-white u-align-left-sm u-align-left-xs u-border-2 u-border-active-white u-border-hover-white u-border-white u-btn u-btn-round u-button-style u-hover-white u-none u-radius-50 u-text-active-black u-text-hover-black u-btn-2">customise your phone cover</a>
+                </div>
+              </div>
             </div>
-        </div>
-    </div>
-</section>
-<!-- 
-<section class="h-100" style="background-color: #eee;">
-  <div class="container h-100 py-5">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-10">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-          <h1 class="fw-normal mb-0 text-black"><b>Your Shopping Cart</b></h1>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div id="cartItemsContainer"></div>
-<script>
-  function displayCartItems() {
-    const cartItemsContainer = document.getElementById('cartItemsContainer');
-    const cartItems = JSON.parse(localStorage.getItem('cartIT'));
-
-    if (!cartItems || cartItems.length === 0) {
-      cartItemsContainer.innerHTML = '<p><h3><center>Currently, your Shopping Cart is empty.</center></h3></p>';
-      return;
-    }
-
-    cartItemsContainer.innerHTML = ''; 
-    cartItems.forEach(item => {
-      const cartItemElement = document.createElement('div');
-      cartItemElement.classList.add('card', 'rounded-3', 'mb-4');
-      console.log(item)
-      if(item.case_material == "softcase"){
-        item.price = 199
-      }
-      if(item.case_material == "hardcase"){
-        item.price = 250
-      }
-      if(item.case_material == "metalcase"){
-        item.price = 300
-      }
-      if(item.case_material == "glasscase"){
-        item.price =  350
-      }
-      cartItemElement.innerHTML = `
-      <div class="card-body p-4">
-        <div class="row d-flex justify-content-between align-items-center">
-          <div class="col-md-2 col-lg-2 col-xl-2">
-            <img src="/pic/${item.imageurl}" class="img-fluid rounded-3" alt="${item.imagename}">
-          </div>
-          <div class="col-md-3 col-lg-3 col-xl-3">
-            <p class="lead fw-normal mb-2">${item.imagename}</p>
-            <p><span class="text-muted">Case Type: </span>${item.case_material}</p>
-            <p><span class="text-muted">Brand: </span>${item.phonebrand}</p>
-            <p><span class="text-muted">Model: </span>${item.phonemodel}</p>
-          </div>
-          <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-            <input min="0" name="quantity" value="1" type="number" class="form-control form-control-sm" />
-          </div>
-          <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
-            <h5 class="mb-0">RS. ${item.price}</h5>
-          </div>
-          <div class="col-md-1 col-lg-1 col-xl-1 text-end">
-            <button type="button" class="close" aria-label="Close" id="close" onclick="removecartm, cv">
-              <span aria-hidden="true">&times;</span>
-            </button>
-            <i class="fas fa-trash fa-lg text-danger" onclick="removeCartItem('${item.imagename}')"></i>
           </div>
         </div>
       </div>
-    `;
-
-      cartItemsContainer.appendChild(cartItemElement);
-    });
-
-    // Add the "Proceed to Pay" button after the cart items
-    const proceedButton = document.createElement('button');
-    proceedButton.type = 'button';
-    proceedButton.dataset.mdbButtonInit = true;
-    proceedButton.dataset.mdbRippleInit = true;
-    proceedButton.className = 'btn btn-proceed btn-block btn-lg';
-    proceedButton.style.cssText = 'background-color: #007bff; color: white; border: none; outline: none; box-shadow: none;';
-    proceedButton.textContent = 'Proceed to Pay';
-    cartItemsContainer.appendChild(proceedButton);
-  }
-
-  // Call the function to display cart items when the page loads
-  window.onload = displayCartItems;
-</script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-<script>
-  var elements = document.getElementsByClassName("u-section-1");
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].style.backgroundImage = 'url("https://c1.wallpaperflare.com/preview/51/932/916/hand-holding-phone-mobile-phone.jpg")';
-  }
-</script>
-
-//contact us part
-
-
-
-
-<script>
-  // Adjust background image for other sections
-  var elements = document.getElementsByClassName("u-section-1");
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].style.backgroundImage = 'url("https://c1.wallpaperflare.com/preview/51/932/916/hand-holding-phone-mobile-phone.jpg")';
-  }
-  
-  var images = ["u-image-1", "u-image-2", "u-image-3", "u-image-4", "u-image-5", "u-image-6"];
-  for (var j = 0; j < images.length; j++) {
-    var elements = document.getElementsByClassName(images[j]);
-    for (var i = 0; i < elements.length; i++) {
-      elements[i].style.backgroundImage = 'url("https://c1.wallpaperflare.com/preview/51/932/916/hand-holding-phone-mobile-phone.jpg")';
-    }
-  }
-</script>
-</body>
-
-<footer class="u-align-center u-clearfix u-footer u-grey-80 u-footer" id="sec-b7f2"><div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-  <p class="u-small-text u-text u-text-variant u-text-1">Website by Earthling Aid Tech</p>
-</div></footer>
-</html> -->
-
-
-
-
+    </section>
 <section class="h-100" style="background-color: #eee;">
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">

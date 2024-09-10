@@ -21,46 +21,46 @@
 </head>
 <body class="u-body u-xl-mode" data-lang="en">
   <style>
-      .navbar {
-          background-color: #f8f9fa; /* Light gray background */
-          border-bottom: 1px solid #ddd; /* Gray border bottom */
-          box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
-      }
-      .navbar-brand {
-          font-size: 1.5rem; /* Larger font size for brand */
-          color: #333; /* Dark text color */
-          font-weight: bold; /* Bold text */
-      }
-      .navbar-nav .nav-link {
-          font-size: 1.2rem; /* Slightly larger font size for links */
-          color: #333; /* Dark text color */
-          padding: 0.5rem 1rem; /* Padding around links */
-          transition: all 0.3s ease; /* Smooth transition */
-          letter-spacing: 0.05rem; /* Slight letter spacing for readability */
-      }
-      .navbar-nav .nav-link:hover {
-          color: #007bff; /* Change color on hover to primary */
-          background-color: #e9ecef; /* Light gray background on hover */
-          border-radius: 4px; /* Rounded corners on hover */
-      }
-      .navbar-toggler {
-          border-color: #403e3e; /* Dark color for toggler border */
-      }
-      .navbar-toggler-icon {
-          background-color: #333; /* Dark color for toggler icon */
-          color: #fff; /* White color for icon */
-      }
-      @media (max-width: 992px) {
-          .navbar-nav {
-              flex-direction: row; /* Display items horizontally */
-          }
-          .navbar-nav .nav-link {
-              text-align: center; /* Center text on smaller screens */
-              padding: 1rem; /* More padding for better touch support */
-              font-size: 2.5vw; /* Adjust font size for smaller screens */
-          }
-      }
-  </style>
+    .navbar {
+        background-color: #f8f9fa; /* Light gray background */
+        border-bottom: 1px solid #ddd; /* Gray border bottom */
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    }
+    .navbar-brand {
+        font-size: 1.5rem; /* Larger font size for brand */
+        color: #333; /* Dark text color */
+        font-weight: bold; /* Bold text */
+    }
+    .navbar-nav .nav-link {
+        font-size: 1.2rem; /* Slightly larger font size for links */
+        color: #333; /* Dark text color */
+        padding: 0.5rem 1rem; /* Padding around links */
+        transition: all 0.3s ease; /* Smooth transition */
+        letter-spacing: 0.05rem; /* Slight letter spacing for readability */
+    }
+    .navbar-nav .nav-link:hover {
+        color: #007bff; /* Change color on hover to primary */
+        background-color: #e9ecef; /* Light gray background on hover */
+        border-radius: 4px; /* Rounded corners on hover */
+    }
+    .navbar-toggler {
+        border-color: #403e3e; /* Dark color for toggler border */
+    }
+    .navbar-toggler-icon {
+        background-color: #333; /* Dark color for toggler icon */
+        color: #fff; /* White color for icon */
+    }
+    @media (max-width: 992px) {
+        .navbar-nav {
+            flex-direction: row; /* Display items horizontally */
+        }
+        .navbar-nav .nav-link {
+            text-align: center; /* Center text on smaller screens */
+            padding: 1rem; /* More padding for better touch support */
+            font-size: 2.5vw; /* Adjust font size for smaller screens */
+        }
+    }
+</style>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <div class="navbar-collapse collapse show" id="navbarSupportedContent">
@@ -86,223 +86,251 @@
     </nav>
 
 <body class="u-body u-xl-mode" data-lang="en">
-<style>
-    @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:400,700');
-body{ 
-  font-family: 'Roboto Condensed', sans-serif;
-  color: #262626;
-  margin:  0;
-}
-.container{
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-}
-@media (min-width: 1200px)
-{
-  .container{
-    max-width: 1140px;
-  }
-}
-.d-flex{
-  display: flex;
-  flex-direction: row;
-  background: #f6f6f6;
-  border-radius: 0 0 5px 5px;
-  padding: 25px;
-}
-form{
-  flex: 4;
-}
-.Yorder{
-  flex: 2;
-}
-.title{
-  background: -webkit-gradient(linear, left top, right bottom, color-stop(0, #5195A8), color-stop(100, #70EAFF));
-  background: -moz-linear-gradient(top left, #5195A8 0%, #70EAFF 100%);
-  background: -ms-linear-gradient(top left, #5195A8 0%, #70EAFF 100%);
-  background: -o-linear-gradient(top left, #5195A8 0%, #70EAFF 100%);
-  background: linear-gradient(to bottom right, #5195A8 0%, #70EAFF 100%);
-  border-radius:5px 5px 0 0 ;
-  padding: 20px;
-  color: #f6f6f6;
-}
-h2{
-  margin: 0;
-  padding-left: 15px; 
-}
-.required{
-  color: red;
-}
-label, table{
-  display: block;
-  margin: 15px;
-}
-label>span{
-  float: left;
-  width: 25%;
-  margin-top: 12px;
-  padding-right: 10px;
-}
-input[type="text"], input[type="tel"], input[type="email"], select
-{
-  width: 70%;
-  height: 30px;
-  padding: 5px 10px;
-  margin-bottom: 10px;
-  border: 1px solid #dadada;
-  color: #888;
-}
-select{
-  width: 72%;
-  height: 45px;
-  padding: 5px 10px;
-  margin-bottom: 10px;
-}
-.Yorder{
-  margin-top: 15px;
-  height: 600px;
-  padding: 20px;
-  border: 1px solid #dadada;
-}
-table{
-  margin: 0;
-  padding: 0;
-}
-th{
-  border-bottom: 1px solid #dadada;
-  padding: 10px 0;
-}
-tr>td:nth-child(1){
-  text-align: left;
-  color: #2d2d2a;
-}
-tr>td:nth-child(2){
-  text-align: right;
-  color: #52ad9c;
-}
-td{
-  border-bottom: 1px solid #dadada;
-  padding: 25px 25px 25px 0;
-}
-
-p{
-  display: block;
-  color: #888;
-  margin: 0;
-  padding-left: 25px;
-}
-.Yorder>div{
-  padding: 15px 0; 
-}
-
-button{
-  width: 100%;
-  margin-top: 10px;
-  padding: 10px;
-  border: none;
-  border-radius: 30px;
-  background: #52ad9c;
-  color: #fff;
-  font-size: 15px;
-  font-weight: bold;
-}
-button:hover{
-  cursor: pointer;
-  background: #428a7d;
-}
+  <style>
+    @import url('https://fonts.googleapis.com/css?family=Roboto:400,700');
+    
+    body {
+      font-family: 'Roboto', sans-serif;
+      background: #f4f4f4;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+    
+    .title {
+      background: linear-gradient(135deg, #5D9CEC, #4A89DC);
+      border-radius: 10px 10px 0 0;
+      padding: 20px;
+      text-align: center;
+      color: #fff;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    
+    .d-flex {
+      display: flex;
+      flex-direction: column;
+      background: #f9f9f9;
+      border-radius: 0 0 10px 10px;
+      padding: 25px;
+    }
+    
+    form {
+      width: 100%;
+    }
+    
+    label {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 15px;
+      font-size: 14px;
+    }
+    
+    label span {
+      margin-bottom: 5px;
+      color: #555;
+      font-weight: 700;
+    }
+    
+    label span .required {
+      color: red; /* Makes the * red */
+    }
+    
+    input[type="text"], input[type="tel"], input[type="email"], input[type="number"], select {
+      width: 100%;
+      height: 45px;
+      padding: 10px;
+      margin-bottom: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      color: #333;
+      font-size: 14px;
+      background: #fff;
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+      transition: border-color 0.3s ease;
+    }
+    
+    input[type="text"]:focus, input[type="tel"]:focus, input[type="email"]:focus, input[type="number"]:focus, select:focus {
+      border-color: #4A89DC;
+    }
+    
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 30px;
+      background: #4A89DC;
+      color: #fff;
+      font-size: 16px;
+      font-weight: bold;
+      text-transform: uppercase;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    
+    button:hover {
+      background: #357ABD;
+    }
+    
+    .qr-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      border: 2px solid #eee;
+      border-radius: 20px;
+      background: #fff;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      transition: box-shadow 0.3s ease;
+      max-width: 250px;
+      margin: auto;
+    }
+    
+    .qr-container:hover {
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    }
+    
+    .qr-container img {
+      max-width: 150px;
+      border-radius: 10px;
+    }
+    
+    .qr-container p {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #777;
+    }
+    
+    @media (min-width: 768px) {
+      .d-flex {
+        flex-direction: row;
+      }
+    
+      form {
+        flex: 3;
+        margin-right: 20px;
+      }
+    
+      .Yorder {
+        flex: 2;
+      }
+    }
 </style>
 
+
 <div class="container">
-    <div class="title">
+      <div class="title">
         <h2>Product Order Form</h2>
-    </div>
-  <div class="d-flex">
-    <form action="/orderupload" method="POST" enctype="multipart/form-data">
-      <label>
-        <span class="fname">Name <span class="required">*</span></span>
-        <input type="text" name="fname" required>
-      </label>
-
-      <label>
-        <span>Case Material<span class="required">*</span></span>
-        <select name="case_material" id="case_material" required>
-          <option value="softcase">silicon case</option>
-          <option value="hardcase">hard case</option>
-          <option value="glasscase">glass case</option>
-          <option value="metalcase">metalcase</option>
-        </select>
-      </label>
-      <label>
-        <span>Phone Brand<span class="required">*</span></span>
-        <select class="brandSelector" name="phone_brand" id="phone_brand" required>
-          <option value=""  selected="true" disabled="disabled" >Choose Brand</option>
-        </select>
-      </label>
-
-      <label>
-        <span>Phone Model<span class="required">*</span></span>
-        <select class="modelSelector" name="phone_model" id="phone_model" required>
-          <option>Select a brand first</option>
-        </select>
-      </label>
-      <label>
-        <span>custom image<span class="required">*</span></span>
-        <label>
-          <span>quantity <span class="required">*</span></span>
-          <input type="number" name="quantity" required value="1"> 
-        </label>
-        <input type="file" name="custom_image" accept="image/*" required> 
-        <div class="qr-container">
-          <img src="/images/payqr.png" alt="QR Code" class="img-fluid">
-          <p class="mt-2">Scan the QR code to complete the payment.</p>
       </div>
-      </label>
-      <label>
-        <span>Payment screenshot<span class="required">*</span></span>
-        <input type="file" name="payment_screenshot" accept="image/*" required> 
-      </label>
-      <label>
-        <span>Add Custom Name</span> 
-        <input type="text" name="custname" id="state" placeholder="Enter a name you want to add in the cover."> 
-      </label>
-      <label>
-        <span>current location to order<span class="required" >*</span></span>
-        <a  class="btn btn-primary" onclick="getLocation()">get current Location</a>
-      </label>
-      <input type="text" name="geolocation" id="demo" hidden>
-      <label>
-        <span>State<span class="required">*</span></span>
-        <input type="text" name="state" id="state" required> 
-      </label>
-      <label>
-        <span>Town / City <span class="required">*</span></span>
-        <input type="text" name="city" id="city" required> 
-      </label>
-      <label>
-        <span>Postcode / ZIP <span class="required">*</span></span>
-        <input type="text" name="postcode" id="postcode" required> 
-      </label>
-      <label>
-        <span>Address <span class="required">*</span></span>
-        <input type="text" name="address" id="address" placeholder="House number and street name" required>
-      </label>
-      <label>
-        <span>Phone <span class="required">*</span></span>
-        <input type="tel" name="phone" required> 
-      </label>
-      <label>
-        <span>Email Address <span class="required">*</span></span>
-        <input type="email" name="email" required> 
-      </label>
-      <button class="btn btn-danger" type="submit">submit</button>
-      <input type="hidden" name="price" id="case_price" value="0">
-    </form>
-   </div>
-  </div>
-  <script>
+      <div class="d-flex">
+        <form action="/orderupload" method="POST" enctype="multipart/form-data">
+          <label>
+            <span>Name <span class="required">*</span></span>
+            <input type="text" name="fname" required>
+          </label>
+    
+          <label>
+            <span>Case Material<span class="required">*</span></span>
+            <select name="case_material" id="case_material" required>
+              <option value="softcase">Silicon Case</option>
+              <option value="hardcase">Hard Case</option>
+              <option value="glasscase">Glass Case</option>
+              <option value="metalcase">Metal Case</option>
+            </select>
+          </label>
+    
+          <label>
+            <span>Phone Brand<span class="required">*</span></span>
+            <select class="brandSelector" name="phone_brand" id="phone_brand" required>
+              <option value="" selected="true" disabled="disabled">Choose Brand</option>
+            </select>
+          </label>
+    
+          <label>
+            <span>Phone Model<span class="required">*</span></span>
+            <select class="modelSelector" name="phone_model" id="phone_model" required>
+              <option>Select a brand first</option>
+            </select>
+          </label>
+    
+          <label>
+            <span>Custom Image<span class="required">*</span></span>
+            <input type="file" name="custom_image" accept="image/*" required>
+          </label>
+    
+          <label>
+            <span>Quantity<span class="required">*</span></span>
+            <input type="number" name="quantity" required value="1">
+          </label>
+    
+          <div class="qr-container">
+            <img src="/images/payqr.png" alt="QR Code">
+            <p>Scan the QR code to complete the payment.</p>
+          </div><br>
+    
+          <label>
+            <span>Payment Screenshot<span class="required">*</span></span>
+            <input type="file" name="payment_screenshot" accept="image/*" required>
+          </label>
+    
+          <label>
+            <span>Add Custom Name</span>
+            <input type="text" name="custname" id="custname" placeholder="Enter a name you want to add on the cover.">
+          </label>
+    
+          <label>
+            <span>Current Location to Order<span class="required">*</span></span>
+            <a class="btn btn-primary" onclick="getLocation()">Get Current Location</a>
+            <input type="text" name="geolocation" id="demo" hidden>
+          </label>
+    
+          <label>
+            <span>State<span class="required">*</span></span>
+            <input type="text" name="state" id="state" required>
+          </label>
+    
+          <label>
+            <span>Town / City<span class="required">*</span></span>
+            <input type="text" name="city" id="city" required>
+          </label>
+    
+          <label>
+            <span>Postcode / ZIP<span class="required">*</span></span>
+            <input type="text" name="postcode" id="postcode" required>
+          </label>
+    
+          <label>
+            <span>Address<span class="required">*</span></span>
+            <input type="text" name="address" id="address" placeholder="House number and street name" required>
+          </label>
+    
+          <label>
+            <span>Phone<span class="required">*</span></span>
+            <input type="tel" name="phone" required>
+          </label>
+    
+          <label>
+            <span>Email Address<span class="required">*</span></span>
+            <input type="email" name="email" required>
+          </label>
+    
+          <button type="submit">Submit</button>
+          <input type="hidden" name="price" id="case_price" value="0">
+        </form>
+      </div>
+    </div>
+
+  <script> 
     var x = document.getElementById("demo");
     function getLocation() {
       if (navigator.geolocation) {
@@ -358,15 +386,12 @@ button:hover{
 
 
 { 'brand': 'iPhone', 'model': 'iPhone 5', 'case_material': 'softcase' },
-  { 'brand': 'iPhone', 'model': '5S', 'case_material': 'softcase' },
-  { 'brand': 'iPhone', 'model': '5C', 'case_material': 'softcase' },
-  { 'brand': 'iPhone', 'model': 'iPhone 6', 'case_material': 'softcase' },
-  { 'brand': 'iPhone', 'model': '6s', 'case_material': 'softcase' },
-  { 'brand': 'samsung', 'model': 'Galaxy S10', 'case_material': 'softcase' },
-
-
-
-  {'brand': 'iPhone', 'model': 'iPhone 7', 'case_material': 'softcase'}, 
+{ 'brand': 'iPhone', 'model': '5S', 'case_material': 'softcase' },
+{ 'brand': 'iPhone', 'model': '5C', 'case_material': 'softcase' },
+{ 'brand': 'iPhone', 'model': 'iPhone 6', 'case_material': 'softcase' },
+{ 'brand': 'iPhone', 'model': '6s', 'case_material': 'softcase' },
+{ 'brand': 'samsung', 'model': 'Galaxy S10', 'case_material': 'softcase' },
+{'brand': 'iPhone', 'model': 'iPhone 7', 'case_material': 'softcase'}, 
  {'brand': 'iPhone', 'model': '8', 'case_material': 'softcase'}, 
  {'brand': 'iPhone', 'model': 'SE', 'case_material': 'softcase'},
   {'brand': 'iPhone', 'model': 'iPhone 6 Plus', 'case_material': 'softcase'},
@@ -450,14 +475,11 @@ caseMaterialSelector.addEventListener('change', () => {
         });
     }
 });
-
-
-
-
-
-            </script>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-</body></html>
+</script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl  +NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+</script>
+</body>
+</html>
 
 
 
