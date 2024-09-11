@@ -138,13 +138,8 @@
                 window.location.href = '/'
             } else {
                 cartItems.forEach(item => {
-                    const prices = {
-                        'softcase': 199,
-                        'hardcase': 250,
-                        'metalcase': 300,
-                        'glasscase': 350
-                    };
-                    const itemPrice = prices[item.case_material] || 0;
+
+                    const itemPrice = item.price
                     const quantity = item.quantity || 1;
                     const totalItemPrice = itemPrice * quantity;
                     totalAmount += totalItemPrice;

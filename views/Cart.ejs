@@ -166,14 +166,7 @@ function displayCartItems() {
   let total = 0;
 
   cartItems.forEach(item => {
-    const prices = {
-      'softcase': 199,
-      'hardcase': 250,
-      'metalcase': 300,
-      'glasscase': 350
-    };
-
-    item.price = prices[item.case_material] || 0;
+  
     const quantity = item.quantity || 1; // Default to 1 if no quantity is set
 
     const cartItemElement = document.createElement('div');

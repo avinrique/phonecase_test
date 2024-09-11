@@ -1,4 +1,6 @@
 const Design = require('./../model/designmodel')
+const fs = require("fs")
+const path = require("path")
 exports.gethomecontrol = (req,res)=>{
     Design.find({}, (err, designs) => {
         if (err) {
@@ -20,7 +22,17 @@ exports.getcontactcontrol = (req,res)=>{
     res.render("Contact")
 }
 exports.getcustomordercontrol = (req,res)=>{
-    res.render("order")
+    fs.readFile(path.join(__dirname, 'outs.json'), 'utf8', (err, data) => {
+        if (err) {
+            console.error('Error reading file:', err);
+            return;
+        }
+        console.log("asddasdasdas")
+        const phoneData = JSON.parse(data); // Parse the JSON string
+        res.render("order", { ps: phoneData.products}); 
+        console.log(phoneData) // Now you can access the products array
+    });
+   
 }
 exports.getadminlogincontrol = async(req,res)=>{
     res.render("adminlogin")
