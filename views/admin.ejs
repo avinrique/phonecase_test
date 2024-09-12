@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Upload a Design</title>
+    <title>Upload a Design & Model</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,25 +12,32 @@
             padding: 20px;
         }
 
-                /* Form styling */
-                form {
+        .form-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        form {
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 20px auto;
+            max-width: 45%;
+            flex-grow: 1;
             display: flex;
             flex-direction: column;
-            gap: 10px; /* Reduce the gap between form elements */
+            gap: 10px;
         }
 
         h3 {
-            margin-bottom: 5px; /* Reduce the bottom margin of headings */
+            margin-bottom: 5px;
             font-weight: bold;
         }
 
-        input[type="text"], input[type="file"], select {
+        input[type="text"], input[type="file"], input[type="number"], select {
             width: 100%;
             padding: 10px;
             font-size: 16px;
@@ -55,7 +62,7 @@
         }
 
         .required {
-            color: red; /* Red color for required indicator */
+            color: red;
         }
 
         .table-container {
@@ -88,7 +95,7 @@
             top: 0;
             z-index: 10;
             border-top: 1px solid #555;
-            box-shadow: inset 0 -1px #555; 
+            box-shadow: inset 0 -1px #555;
         }
 
         tr:hover {
@@ -103,41 +110,67 @@
             text-align: left;
             margin-bottom: 20px;
         }
-        required {
-            color: red; 
-        }
     </style>
 </head>
 <body>
-    <h1>Upload a Design</h1>
-    <form action="/upload" method="POST" enctype="multipart/form-data">
-        <h3>Design Image <span class="required">*</span></h3>
-        <input type="file" name="design_image" accept="image/*" required>
+    <h1>Upload Design & Model</h1>
+    <div class="form-container">
+        <!-- Upload Design Form -->
+        <form action="/upload-design" method="POST" enctype="multipart/form-data">
+            <h3>Design Image <span class="required">*</span></h3>
+            <input type="file" name="design_image" accept="image/*" required>
 
-        <h3>Design Name <span class="required">*</span></h3>
-        <input type="text" name="design_name" placeholder="Design Name" required>
+            <h3>Design Name <span class="required">*</span></h3>
+            <input type="text" name="design_name" placeholder="Design Name" required>
 
-        <h3>Category <span class="required">*</span></h3>
-        <select name="category" required>
-            <option value="" disabled selected>Select a category</option>
-            <option value="Anime">Anime</option>
-            <option value="Classic">Classic</option>
-            <option value="marble desing">Marble Design</option>
-            <option value="Classic Dark">Classic Dark</option>
-            <option value="customised Photo">Customized Photo</option>
-            <option value="customised Design">Customized Design</option>
-            <option value="Marval">Marval</option>
-            <option value="funky">Funky</option>
-            <option value="traditional">Traditional</option>
-            <option value="custom Name">Custom Name</option>
-            <option value="sports">Sports</option>
-            <option value="others">Others</option>
-        </select>
+            <h3>Category <span class="required">*</span></h3>
+            <select name="category" required>
+                <option value="" disabled selected>Select a category</option>
+                <option value="Anime">Anime</option>
+                <option value="Classic">Classic</option>
+                <option value="Marble Design">Marble Design</option>
+                <option value="Classic Dark">Classic Dark</option>
+                <option value="Customized Photo">Customized Photo</option>
+                <option value="Customized Design">Customized Design</option>
+                <option value="Marvel">Marvel</option>
+                <option value="Funky">Funky</option>
+                <option value="Traditional">Traditional</option>
+                <option value="Custom Name">Custom Name</option>
+                <option value="Sports">Sports</option>
+                <option value="Others">Others</option>
+            </select>
 
-        <input type="submit" value="Upload Design">
-    </form>
+            <h3>Price</h3>
+            <input type="number" name="price" placeholder="Enter Price">
 
+            <input type="submit" value="Upload Design">
+        </form>
 
+        <!-- Upload Model Form -->
+        <form action="/upload-model" method="POST" enctype="multipart/form-data">
+            <h3>Case Type <span class="required">*</span></h3>
+            <select name="case_type" required>
+                <option value="" disabled selected>Select a case type</option>
+                <option value="Soft Case">Soft Case</option>
+                <option value="Hard Case">Hard Case</option>
+                <option value="Glass Case">Glass Case</option>
+                <option value="Metal Case">Metal Case</option>
+            </select>
+
+            <h3>Brand <span class="required">*</span></h3>
+            <input type="text" name="brand" placeholder="Enter Brand" required>
+
+            <h3>Model <span class="required">*</span></h3>
+            <input type="text" name="model" placeholder="Enter Model" required>
+
+            <h3>Price <span class="required">*</span></h3>
+            <input type="number" name="price" placeholder="Enter Price" required>
+
+            <input type="submit" value="Upload Model">
+        </form>
+    </div>
+
+    <!-- Order List Table -->
     <div class="container">
         <h2>Order List</h2>
         <div class="table-container">
@@ -155,7 +188,7 @@
                         <th>Payment Screenshot</th>
                         <th>Delivery Status</th>
                         <th>Genuine Paid</th>
-                        <th>Order Summary</th> 
+                        <th>Order Summary</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -187,7 +220,7 @@
                                                 const primaryImagePath = `/pic/${item.imageurl}`; 
                                                 const fallbackImagePath = `/customorder/${item.imageurl}`; 
                                             %>
-                                            <img src="<%= primaryImagePath %>" alt="Ordered Item" width="100" onerror="this.onerror=null; this.src='<%= fallbackImagePath %>';">
+                                            <img src="<%= primaryImagePath %>" alt="Ordered Item" width="100" onerror="this.onerror=null; this.src='<%= fallbackImagePath %>'; ">
                                         </li>
                                     <% }) %>
                                 </ul>
