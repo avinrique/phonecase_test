@@ -200,11 +200,7 @@ app.post('/cart/submit-payment', ssUpload.single('paymentScreenshot'), (req, res
     const paymentScreenshot = req.file.filename;
 
     //logging data
-    console.log('Address:', address);
-    console.log('Location:', geolocation);
-    console.log(phone ,email)
-    console.log('Order Items:', orderItems);
-    console.log('Payment Screenshot:', paymentScreenshot);
+
     const newsOrder = new order_s({
         orderItems,
 
@@ -244,8 +240,7 @@ app.post('/orderupload', uploades.fields([
   
       const { fname: first_name, phone, email, case_material, phone_brand, phone_model, state, city, postcode, address, geolocation, custname } = req.body;
   
-      console.log(first_name, phone, custom_image, email, case_material, phone_brand, phone_model, state, city, postcode, address, geolocation, custname);
-  
+     
       const newOrder = new order_s({
         orderItems: {
           imagename: custom_image,  
@@ -288,7 +283,7 @@ app.post("/addtocart", (req,res)=>{
     image_url= req.body.imageurl
     image_name= req.body.imagename
     image_catagory =  req.body.catagory
-    console.log(image_name,image_url,phone_brand,phone_model)
+    
     const newCart = new carts({
         image_url ,
         case_material,
