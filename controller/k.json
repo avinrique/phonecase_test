@@ -1,0 +1,34 @@
+{
+    "products": [
+        {
+            "brand": "iPhone",
+            "model": "Apple iPhone",
+            "case_material": "metalcase",
+            "price": 311
+        },
+        {
+            "brand": "OnePlus",
+            "model": "OnePlus",
+            "case_material": "metalcase",
+            "price": 311
+        },
+        {
+            "brand": "Oppo",
+            "model": "Oppo",
+            "case_material": "metalcase",
+            "price": 311
+        },
+        {
+            "brand": "aaaa",
+            "model": "aaaa",
+            "case_material": "hardcase",
+            "price": 121
+        },
+        {
+            "brand": "aaaa",
+            "model": "aaaa",
+            "case_material": "softcase",
+            "price": 121
+        }
+    ]
+}

@@ -234,6 +234,62 @@ app.post('/cart/submit-payment', ssUpload.single('paymentScreenshot'), (req, res
 
 });
 
+
+
+const jsonFilePath = path.join(__dirname, 'controller/outs.json');
+app.post('/upload-model', (req, res) => {
+  const { case_type, brand, model, price } = req.body;
+
+  // Create a read stream for the large file
+  const readStream = fs.createReadStream(jsonFilePath, { encoding: 'utf8' });
+  let jsonData = '';
+
+  // Read the file chunk by chunk
+  readStream.on('data', chunk => {
+      jsonData += chunk;
+  });
+
+  // Once the file has been read completely
+  readStream.on('end', () => {
+      try {
+          let parsedData = JSON.parse(jsonData); // Parse the large JSON file
+
+          // Create the new product object
+          const newProduct = {
+              brand: brand,
+              model: model,
+              case_material: case_type.toLowerCase().replace(" ", ""),
+              price: parseInt(price, 10)
+          };
+
+          // Append the new product to the array
+          parsedData.products.push(newProduct);
+
+          // Convert the updated data back to JSON string
+          const updatedJsonData = JSON.stringify(parsedData, null, 4);
+
+          // Write the updated JSON data directly back to outs.json
+          fs.writeFile(jsonFilePath, updatedJsonData, 'utf8', (err) => {
+              if (err) {
+                  return res.status(500).send('Error writing to the JSON file');
+              }
+
+              // Send success response
+              res.send('Model uploaded and added successfully!');
+          });
+      } catch (err) {
+          return res.status(500).send('Error parsing JSON data');
+      }
+  });
+
+  // Handle any error in reading the file
+  readStream.on('error', err => {
+      return res.status(500).send('Error reading the JSON file');
+  });
+});
+
+
+
 app.post('/orderupload', uploades.fields([
     { name: 'custom_image', maxCount: 1 },
     { name: 'payment_screenshot', maxCount: 1 }

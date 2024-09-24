@@ -147,27 +147,28 @@
         </form>
 
         <!-- Upload Model Form -->
-        <form action="/upload-model" method="POST" enctype="multipart/form-data">
+        <form action="/upload-model" method="POST" >
             <h3>Case Type <span class="required">*</span></h3>
             <select name="case_type" required>
                 <option value="" disabled selected>Select a case type</option>
-                <option value="Soft Case">Soft Case</option>
-                <option value="Hard Case">Hard Case</option>
-                <option value="Glass Case">Glass Case</option>
-                <option value="Metal Case">Metal Case</option>
+                <option value="softcase">Soft Case</option>
+                <option value="hardcase">Hard Case</option>
+                <option value="glasscase">Glass Case</option>
+                <option value="metalcase">Metal Case</option>
             </select>
-
+        
             <h3>Brand <span class="required">*</span></h3>
             <input type="text" name="brand" placeholder="Enter Brand" required>
-
+        
             <h3>Model <span class="required">*</span></h3>
             <input type="text" name="model" placeholder="Enter Model" required>
-
+        
             <h3>Price <span class="required">*</span></h3>
             <input type="number" name="price" placeholder="Enter Price" required>
-
+        
             <input type="submit" value="Upload Model">
         </form>
+        
     </div>
 
     <!-- Order List Table -->
