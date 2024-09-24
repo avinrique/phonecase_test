@@ -271,7 +271,7 @@ app.post('/upload-model', (req, res) => {
               }
 
               // Send success response
-              res.send('Model uploaded and added successfully!');
+              res.redirect('/admin');
           });
       } catch (err) {
           return res.status(500).send('Error parsing JSON data');
